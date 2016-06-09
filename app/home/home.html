@@ -1,0 +1,7 @@
+<md-tabs md-dynamic-height md-border-bottom>
+    <md-tab ng-repeat="tab in tabs" label="{{tab.title}}" ng-click="setFilter(tab.filter)">
+        <md-content layout-padding>
+            <md-card ng-repeat="playof in playofList">{{playof.link}}</md-card>
+        </md-content>
+    </md-tab>
+</md-tabs>

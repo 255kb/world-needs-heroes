@@ -1,0 +1,20 @@
+<md-dialog flex="40" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <p class="md-body-2">Please log in</p>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <p>You must log in to post, vote or comment</p>
+            <md-button class="md-raised md-primary" ng-click="login()">anon</md-button>
+            <md-button class="md-raised md-primary" ng-click="login()">Google</md-button>
+            <md-button class="md-raised md-primary" ng-click="login()">Facebook</md-button>
+            <p class="md-caption">We hate spam. Be sure that we won't use your data or sell them to third parties.</p>
+        </div>
+    </md-dialog-content>
+</md-dialog>
