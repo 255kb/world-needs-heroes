@@ -11,13 +11,16 @@ angular.module('wnh.services', [])
         });
         
         return {
+            getInstance: function () {
+                return firebaseAuthInstance;
+            },
             getUser: function () {
                 return firebaseUser;
             }
         };
     }])
     
-    .factory('Database', ['Auth', '$firebaseObject', function (Auth, $firebaseObject) {
+    .factory('Database', ['Auth', '$firebaseArray', function (Auth, $firebaseArray) {
         var firebaseDatabaseInstance = firebase.database();
         
         return {
@@ -27,9 +30,14 @@ angular.module('wnh.services', [])
                     firebaseDatabaseInstance.ref('posts').push().set(data);                    
                 }
             },
+            newVote: function (postId) {
+                if (Auth.getUser()) {
+                    return firebase.database().ref('votes/' + postId + '/' + Auth.getUser().uid).set(firebase.database.ServerValue.TIMESTAMP);
+                }
+            },
             getPlayof: function (filter) {
                 //TODO filter
-                return $firebaseObject(firebaseDatabaseInstance.ref('posts'));
+                return $firebaseArray(firebaseDatabaseInstance.ref('posts'));
             }
         };
     }]);

@@ -10,6 +10,24 @@
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label>Youtube video link or ID</label>
+                <input required name="videoLink" ng-model="newPost.videoLink">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Hero</label>
+                <md-select ng-model="newPost.hero">
+                    <md-option ng-repeat="hero in heroesList" value="{{hero.id}}">
+                        {{hero.name}}
+                    </md-option>
+                </md-select>
+                <div class="hint">Select "multiple heroes" if more than one are displayed in the video</div>
+            </md-input-container>
         </div>
     </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="post()" style="margin-right:20px;">
+            <md-icon>movie</md-icon> Post
+        </md-button>
+    </md-dialog-actions>
 </md-dialog>

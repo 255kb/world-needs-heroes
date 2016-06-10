@@ -9,9 +9,9 @@ angular.module('wnh', [
     'wnh.controllers',
     'wnh.view2'
 ]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', function ($locationProvider, $routeProvider, $mdThemingProvider) {
-    $mdThemingProvider.theme('default')
+    /*$mdThemingProvider.theme('default')
         .primaryPalette('brown')
-        .accentPalette('yellow');
+        .accentPalette('yellow');*/
 
     $locationProvider.hashPrefix('!');
 

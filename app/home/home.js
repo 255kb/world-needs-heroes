@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wnh.home', ['ngRoute', 'wnh.services'])
+angular.module('wnh.home', ['ngRoute', 'wnh.services', 'ngSanitize'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
@@ -9,7 +9,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         });
     }])
 
-    .controller('HomeCtrl', ['$scope', 'Database', function ($scope, Database) {
+    .controller('HomeCtrl', ['$scope', 'Database', '$sce', function ($scope, Database, $sce) {
         $scope.tabs = [
             {filter: 'day', title: 'Today'},
             {filter: 'week', title: 'Last week'},
@@ -22,6 +22,14 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         $scope.setFilter = function (filter) {
             $scope.currentFilter = filter;
         };
+
+        $scope.getIframeSrc = function (youtubeId) {
+            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + youtubeId);
+        };
+
+        $scope.vote = function (playOfId) {
+            Database.newVote(playOfId);
+        };
         
-        Database.getPlayof($scope.currentFilter).$bindTo($scope, 'playofList');
+        $scope.playofList = Database.getPlayof($scope.currentFilter);
     }]);

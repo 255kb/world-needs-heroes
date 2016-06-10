@@ -1,7 +1,14 @@
 <md-tabs md-dynamic-height md-border-bottom>
     <md-tab ng-repeat="tab in tabs" label="{{tab.title}}" ng-click="setFilter(tab.filter)">
         <md-content layout-padding>
-            <md-card ng-repeat="playof in playofList">{{playof.link}}</md-card>
+            <md-card ng-repeat="playof in playofList">
+                <iframe width="560" height="315" ng-src="{{getIframeSrc(playof.youtubeId)}}" frameborder="0" allowfullscreen></iframe>
+                {{playof.hero}}
+                {{playof.$id}}
+                <md-button class="md-icon-button" ng-click="vote(playof.$id)">
+                    <md-icon>favorite</md-icon>
+                </md-button>
+            </md-card>
         </md-content>
     </md-tab>
 </md-tabs>
