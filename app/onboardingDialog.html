@@ -1,0 +1,26 @@
+<md-dialog flex="60" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <p class="md-body-2">Complete your profile</p>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label>Display name</label>
+                <input required name="displayName" ng-model="onboarding.displayName">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Battle tag (optional)</label>
+                <input name="battleTag" ng-model="onboarding.battleTag">
+            </md-input-container>
+            <div class="hint"><md-icon>public</md-icon> These information will appear on your public profile</div>
+        </div>
+
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="onboard()" style="margin-right:20px;">
+            Save
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

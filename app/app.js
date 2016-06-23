@@ -3,11 +3,12 @@
 // Declare app level module which depends on views, and components
 angular.module('wnh', [
     'firebase',
+    'youtube-embed',
     'ngMaterial',
     'ngRoute',
     'wnh.home',
     'wnh.controllers',
-    'wnh.view2'
+    'wnh.components'
 ]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', function ($locationProvider, $routeProvider, $mdThemingProvider) {
     /*$mdThemingProvider.theme('default')
         .primaryPalette('brown')

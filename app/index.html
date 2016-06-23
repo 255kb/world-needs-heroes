@@ -2,50 +2,45 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>World needs Heroes</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>World needs Heroes</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 </head>
 <body ng-app="wnh" ng-cloak>
-  <md-toolbar class="brown600" ng-controller="ToolbarCtrl">
-    <div class="md-toolbar-tools">
-      <md-button class="md-raised" ng-click="showPostDialog()">
-        <md-icon>movie</md-icon> Post
-      </md-button>
-    </div>
-  </md-toolbar>
+<div ng-view></div>
 
-  <div ng-view></div>
-
-  <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>-->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>
-  <script src="//www.gstatic.com/firebasejs/3.0.3/firebase.js"></script>
-  <script src="//cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
-  <script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>-->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>
+<script src="//www.gstatic.com/firebasejs/3.0.3/firebase.js"></script>
+<script>
     // Initialize the Firebase SDK
     var config = {
-      apiKey: 'AIzaSyA9mff-Z4l_jkT4rJrvwf2YyozlBxU6gRk',
-      authDomain: 'world-needs-heroes.firebaseapp.com',
-      databaseURL: 'https://world-needs-heroes.firebaseio.com',
-      storageBucket: 'world-needs-heroes.appspot.com'
+        apiKey: 'AIzaSyA9mff-Z4l_jkT4rJrvwf2YyozlBxU6gRk',
+        authDomain: 'world-needs-heroes.firebaseapp.com',
+        databaseURL: 'https://world-needs-heroes.firebaseio.com',
+        storageBucket: 'world-needs-heroes.appspot.com'
     };
     firebase.initializeApp(config);
-  </script>
-  <script src="app.js"></script>
-  <script src="home/home.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/services.js"></script>
-  <script src="controllers.js"></script>
+</script>
+<script src="//cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script src="app.js"></script>
+<script src="home/home.js"></script>
+<script src="services.js"></script>
+<script src="controllers.js"></script>
+<script src="components.js"></script>
+<script src="angular-youtube-embed-1.2.0.min.js"></script>
 </body>
 </html>
