@@ -16,12 +16,16 @@
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Hero</label>
-                <md-select ng-model="newPost.hero">
+                <md-select required ng-model="newPost.hero">
                     <md-option ng-repeat="hero in heroesList" value="{{hero.id}}">
                         {{hero.name}}
                     </md-option>
                 </md-select>
                 <div class="hint">Select "Multiple heroes" if more than one are displayed in the video</div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Description (optional)</label>
+                <input name="description" ng-model="newPost.description">
             </md-input-container>
         </div>
     </md-dialog-content>

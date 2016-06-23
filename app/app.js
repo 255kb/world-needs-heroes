@@ -5,10 +5,12 @@ angular.module('wnh', [
     'firebase',
     'youtube-embed',
     'ngMaterial',
+    'vs-repeat',
     'ngRoute',
     'wnh.home',
     'wnh.controllers',
-    'wnh.components'
+    'wnh.components',
+    'wnh.filters'
 ]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', function ($locationProvider, $routeProvider, $mdThemingProvider) {
     /*$mdThemingProvider.theme('default')
         .primaryPalette('brown')

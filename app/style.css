@@ -1,3 +1,95 @@
+@font-face {
+    font-family: 'overwatch-heroes';
+    src:
+            url('fonts/overwatch-heroes.ttf?rql2oo') format('truetype'),
+            url('fonts/overwatch-heroes.woff?rql2oo') format('woff'),
+            url('fonts/overwatch-heroes.svg?rql2oo#overwatch-heroes') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="ohi-"], [class*=" ohi-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'overwatch-heroes' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: middle;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ohi-bastion:before {
+    content: "\e900";
+}
+.ohi-dva:before {
+    content: "\e901";
+}
+.ohi-genji:before {
+    content: "\e902";
+}
+.ohi-hanzo:before {
+    content: "\e903";
+}
+.ohi-junkrat:before {
+    content: "\e904";
+}
+.ohi-lucio:before {
+    content: "\e905";
+}
+.ohi-mccree:before {
+    content: "\e906";
+}
+.ohi-mei:before {
+    content: "\e907";
+}
+.ohi-mercy:before {
+    content: "\e908";
+}
+.ohi-pharah:before {
+    content: "\e909";
+}
+.ohi-reaper:before {
+    content: "\e90a";
+}
+.ohi-reinhardt:before {
+    content: "\e90b";
+}
+.ohi-roadhog:before {
+    content: "\e90c";
+}
+.ohi-soldier76:before {
+    content: "\e90d";
+}
+.ohi-symmetra:before {
+    content: "\e90e";
+}
+.ohi-torbjorn:before {
+    content: "\e90f";
+}
+.ohi-tracer:before {
+    content: "\e910";
+}
+.ohi-widowmaker:before {
+    content: "\e911";
+}
+.ohi-winston:before {
+    content: "\e912";
+}
+.ohi-zarya:before {
+    content: "\e913";
+}
+.ohi-zenyatta:before {
+    content: "\e914";
+}
+
+
+
 .wnh-post {
 }
 .wnh-post-content {
@@ -8,6 +100,83 @@
     left: -10px;
     top: -20px;
 }
+.wnh-post .hero-tag {
+    color: #fff;
+    padding: 4px 6px;
+    border-radius: 3px;
+}
+.wnh-post .hero-icon {
+    font-size: 32px;
+}
+
+.wnh-post .hero-tag.hero-color-multi {
+    background-color: lightgrey;
+}
+.wnh-post .hero-tag.hero-color-genji {
+    background-color: rgb(160, 182, 138);
+}
+.wnh-post .hero-tag.hero-color-mccree {
+    background-color: rgb(183, 79, 55);
+}
+.wnh-post .hero-tag.hero-color-pharah {
+    background-color: rgb(75, 115, 173);
+}
+.wnh-post .hero-tag.hero-color-reaper {
+    background-color: rgb(65, 59, 59);
+}
+.wnh-post .hero-tag.hero-color-soldier76 {
+    background-color: rgb(75, 92, 165);
+}
+.wnh-post .hero-tag.hero-color-tracer {
+    background-color: rgb(251, 169, 41);
+}
+.wnh-post .hero-tag.hero-color-bastion {
+    background-color: rgb(103, 115, 80);
+}
+.wnh-post .hero-tag.hero-color-hanzo {
+    background-color: rgb(63, 58, 54);
+}
+.wnh-post .hero-tag.hero-color-junkrat {
+    background-color: rgb(208, 160, 75);
+}
+.wnh-post .hero-tag.hero-color-mei {
+    background-color: rgb(118, 143, 168);
+}
+.wnh-post .hero-tag.hero-color-torbjorn {
+    background-color: rgb(188, 65, 54);
+}
+.wnh-post .hero-tag.hero-color-widowmaker {
+    background-color: rgb(156, 130, 154);
+}
+.wnh-post .hero-tag.hero-color-dva {
+    background-color: rgb(227, 142, 189);
+}
+.wnh-post .hero-tag.hero-color-reinhardt {
+    background-color: rgb(109, 109, 114);
+}
+.wnh-post .hero-tag.hero-color-roadhog {
+    background-color: rgb(186, 118, 99);
+}
+.wnh-post .hero-tag.hero-color-winston {
+    background-color: rgb(63, 64, 60);
+}
+.wnh-post .hero-tag.hero-color-zarya {
+    background-color: rgb(223, 70, 114);
+}
+.wnh-post .hero-tag.hero-color-lucio {
+    background-color: rgb(136, 193, 60);
+}
+.wnh-post .hero-tag.hero-color-mercy {
+    background-color: rgb(247, 245, 241);
+    color: rgb(66, 51, 46);
+}
+.wnh-post .hero-tag.hero-color-symmetra {
+    background-color: rgb(94, 189, 207);
+}
+.wnh-post .hero-tag.hero-color-zenyatta {
+    background-color: rgb(210, 157, 116);
+}
+
 
 .embed-responsive {
     position: relative;
@@ -30,3 +199,12 @@
     height: 100%;
     border: 0;
 }
+
+.text-small {
+    font-size: 0.8rem;
+}
+md-chips.md-default-theme .md-chips, md-chips .md-chips {
+    box-shadow: none;
+}
+
+.st0{fill:red;color: red;}

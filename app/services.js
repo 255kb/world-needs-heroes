@@ -2,6 +2,35 @@
 
 angular.module('wnh.services', [])
 
+    .factory('Utils', [function () {
+        return {
+            heroesList: {
+                'multi': {id: 'multi', name: 'Multiple heroes'},
+                'genji': {id: 'genji', name: 'Genji'},
+                'mccree': {id: 'mccree', name: 'Mccree'},
+                'pharah': {id: 'pharah', name: 'Pharah'},
+                'reaper': {id: 'reaper', name: 'Reaper'},
+                'soldier76': {id: 'soldier76', name: 'Soldier: 76'},
+                'tracer': {id: 'tracer', name: 'Tracer'},
+                'bastion': {id: 'bastion', name: 'Bastion'},
+                'hanzo': {id: 'hanzo', name: 'Hanzo'},
+                'junkrat': {id: 'junkrat', name: 'Junkrat'},
+                'mei': {id: 'mei', name: 'Mei'},
+                'torbjorn': {id: 'torbjorn', name: 'Torbjörn'},
+                'widowmaker': {id: 'widowmaker', name: 'Widowmaker'},
+                'dva': {id: 'dva', name: 'D.VA'},
+                'reinhardt': {id: 'reinhardt', name: 'Reinhardt'},
+                'roadhog': {id: 'roadhog', name: 'Roadhog'},
+                'winston': {id: 'winston', name: 'Winston'},
+                'zarya': {id: 'zarya', name: 'Zarya'},
+                'lucio': {id: 'lucio', name: 'Lúcio'},
+                'mercy': {id: 'mercy', name: 'Mercy'},
+                'symmetra': {id: 'symmetra', name: 'Symmetra'},
+                'zenyatta': {id: 'zenyatta', name: 'Zenyatta'}
+            }
+        };
+    }])
+
     .factory('Auth', ['$firebaseAuth', function ($firebaseAuth) {
         var firebaseAuthInstance = $firebaseAuth(),
             firebaseUser = null;
@@ -51,7 +80,9 @@ angular.module('wnh.services', [])
             },
             vote: function (postId, alreadyVoted) {
                 if (Auth.getUser()) {
-                    return firebaseDatabaseInstance.ref('votes/' + postId + '/' + Auth.getUser().uid).set(alreadyVoted ? null : firebase.database.ServerValue.TIMESTAMP);
+                    firebaseDatabaseInstance.ref('votes/' + postId + '/' + Auth.getUser().uid).set(alreadyVoted ? null : firebase.database.ServerValue.TIMESTAMP).then(function (result) {
+                        //TODO increase counter
+                    });
                 }
             },
             hasVote: function (postId) {

@@ -14,13 +14,20 @@
             </md-button>
             <span flex></span>
 
-            <md-chips>
-                <md-chip>{{playof.hero}}</md-chip>
-            </md-chips>
+            <div class="hero-tag hero-color-{{playof.hero}}"><span class="ohi-{{playof.hero}} hero-icon"></span> {{playof.hero | heroName}}</div>
         </md-card-actions>
 
-        <md-card-title ng-if="author">
-            <span class="md-subhead">Posted by {{author.name}} ({{author.battletag}})</span>
-        </md-card-title>
+        <md-card-content>
+            <p ng-if="playof.description">{{playof.description}}</p>
+            <div ng-if="author && author.name" class="text-small">
+                Posted by {{author.name}}
+                <span ng-if="author.battletag">
+                    <md-tooltip md-direction="bottom">
+                        BattleTag
+                    </md-tooltip>
+                    ({{author.battletag}})
+                </span>
+            </div>
+        </md-card-content>
     </div>
 </md-card>

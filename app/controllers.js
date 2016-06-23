@@ -113,31 +113,12 @@ angular.module('wnh.controllers', [])
         $scope.showPostDialog = function (event) {
             if (Auth.getUser()) {
                 $mdDialog.show({
-                    controller: function DialogController($scope, $mdDialog) {
-                        $scope.heroesList = [
-                            {id: 'multi', name: 'Multiple heroes'},
-                            {id: 'genji', name: 'Genji'},
-                            {id: 'mccree', name: 'Mccree'},
-                            {id: 'pharah', name: 'Pharah'},
-                            {id: 'reaper', name: 'Reaper'},
-                            {id: 'soldier76', name: 'Soldier: 76'},
-                            {id: 'tracer', name: 'Tracer'},
-                            {id: 'bastion', name: 'Bastion'},
-                            {id: 'hanzo', name: 'Hanzo'},
-                            {id: 'junkrat', name: 'Junkrat'},
-                            {id: 'mei', name: 'Mei'},
-                            {id: 'torbjorn', name: 'Torbjörn'},
-                            {id: 'widowmaker', name: 'Widowmaker'},
-                            {id: 'dva', name: 'D.VA'},
-                            {id: 'reinhardt', name: 'Reinhardt'},
-                            {id: 'roadhog', name: 'Roadhog'},
-                            {id: 'winston', name: 'Winston'},
-                            {id: 'zarya', name: 'Zarya'},
-                            {id: 'lucio', name: 'Lúcio'},
-                            {id: 'mercy', name: 'Mercy'},
-                            {id: 'symmetra', name: 'Symmetra'},
-                            {id: 'zenyatta', name: 'Zenyatta'}
-                        ];
+                    controller: function DialogController($scope, $mdDialog, Utils) {
+                        $scope.heroesList = Utils.heroesList;
+                        $scope.newPost = {
+                            videoLink: '',
+                            hero: ''
+                        };
 
                         $scope.post = function () {
                             if ($scope.newPost.videoLink && $scope.newPost.hero) {
@@ -149,14 +130,18 @@ angular.module('wnh.controllers', [])
                                 }
 
                                 if (videoId) {
-                                    Database.newPost({youtubeId: videoId, hero: $scope.newPost.hero});
+                                    var data = {youtubeId: videoId, hero: $scope.newPost.hero};
+                                    if ($scope.newPost.description) {
+                                        data.description = $scope.newPost.description;
+                                    }
+                                    Database.newPost(data);
                                 } else {
                                     //TODO show error if no valid id
                                 }
+                                $mdDialog.hide();
                             } else {
                                 //TODO show error message if empty
                             }
-                            $mdDialog.hide();
                         };
 
                         $scope.hide = function () {
