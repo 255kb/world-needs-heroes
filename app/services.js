@@ -72,16 +72,30 @@ angular.module('wnh.services', [])
             newPost: function (data) {
                 if (Auth.getUser()) {
                     data.userId = Auth.getUser().uid;
+                    data.votesCount = 0;
+
                     var newPost = firebaseDatabaseInstance.ref('posts').push();
-                    newPost.set(data);
-                    //add to profile posts
-                    firebaseDatabaseInstance.ref('profile/' + Auth.getUser().uid + '/posts/' + newPost.key).set(true);
+                    newPost.set(data).then(function (result) {
+                        //add to profile posts
+                        firebaseDatabaseInstance.ref('profile/' + Auth.getUser().uid + '/posts/' + newPost.key).set(true);
+                    });
                 }
             },
             vote: function (postId, alreadyVoted) {
                 if (Auth.getUser()) {
-                    firebaseDatabaseInstance.ref('votes/' + postId + '/' + Auth.getUser().uid).set(alreadyVoted ? null : firebase.database.ServerValue.TIMESTAMP).then(function (result) {
-                        //TODO increase counter
+                    //fetch current counter
+                    return firebaseDatabaseInstance.ref('posts/' + postId + '/votesCount').once('value').then(function (currentCount) {
+                        var updates = {};
+
+                        if (alreadyVoted) {
+                            updates['posts/' + postId + '/votesCount'] = currentCount.val() - 1;
+                            updates['votes/' + postId + '/' + Auth.getUser().uid] = null;
+                        } else {
+                            updates['posts/' + postId + '/votesCount'] = currentCount.val() + 1;
+                            updates['votes/' + postId + '/' + Auth.getUser().uid] = firebase.database.ServerValue.TIMESTAMP;
+                        }
+                        
+                        return firebaseDatabaseInstance.ref().update(updates);
                     });
                 }
             },

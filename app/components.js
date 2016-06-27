@@ -7,7 +7,11 @@ angular.module('wnh.components', ['wnh.services'])
             $scope.playof = this.playof;
 
             $scope.vote = function () {
-                Database.vote($scope.playof.$id, $scope.hasVote);
+                Database.vote($scope.playof.$id, $scope.hasVote).then(function () {
+                    //TODO update UI
+                }).catch(function (error) {
+                    //TODO handle failures / retry                        
+                });
                 $scope.hasVote = !$scope.hasVote;
             };
 

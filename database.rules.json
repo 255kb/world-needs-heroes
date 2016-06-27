@@ -2,23 +2,25 @@
   "rules": {
     "posts": {
       ".read": true,
+      ".indexOn": ["votesCount"],
       "$postId": {
-        ".write": "auth.uid === newData.child('userId').val() && !data.exists()",
-        // Allow creates
+        //post author has right to create, anyone can update (except validation below)
+        ".write": "(auth.uid === newData.child('userId').val() && !data.exists()) || (auth !== null && data.exists())",
+        "votesCount": {
+          //need a number, equal to existing data +/- 1, only if adding or removing votes items
+          ".validate": "(!data.exists() && newData.val() === 0) || (data.exists() && ( (newData.val() === data.val() + 1 && newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && !data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists())  || (newData.val() === data.val() - 1 && !newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists()) ))"
+        },
         "userId": {
-          ".validate": "newData.isString()"
+          ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
         },
         "hero": {
-          ".validate": "newData.isString()"
+          ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
         },
         "description": {
-          ".validate": "newData.isString()"
+          ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
         },
         "youtubeId": {
-          ".validate": "newData.isString()"
-        },
-        "votes": {
-          ".validate": "newData.isNumber()  && ( (!data.exists() && newData.val() === 1) || newData.val() === data.val() + 1 || newData.val() === data.val() - 1)"
+          ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
         },
         "$other": {
           ".validate": false
@@ -28,11 +30,11 @@
     "comments": {
       ".read": true,
       "$postId": {
-        ".validate": "root.child('posts').child($postId).exists()",
         // Check that the post exists
+        ".validate": "root.child('posts').child($postId).exists()",
         "$commentId": {
-          ".write": "(auth.uid === newData.child('author').child('uid').val() && !data.exists()) || (auth.uid === data.child('author').child('uid').val() && !newData.exists())",
           // Can only create or delete comments if you are the author
+          ".write": "(auth.uid === newData.child('author').child('uid').val() && !data.exists()) || (auth.uid === data.child('author').child('uid').val() && !newData.exists())",
           "$other": {
             ".validate": false
           }
@@ -42,8 +44,8 @@
     "votes": {
       ".read": true,
       "$postId": {
-        ".validate": "root.child('posts').child($postId).exists()",
         // Check that the post exists
+        ".validate": "root.child('posts').child($postId).exists()",
         "$uid": {
           ".write": "auth.uid === $uid",
           ".validate": "newData.val() === now"
