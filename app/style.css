@@ -1,4 +1,11 @@
 @font-face {
+    font-family: 'Big Noodle Too';
+    src:url('fonts/big-noodle.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'overwatch-heroes';
     src:
             url('fonts/overwatch-heroes.ttf?rql2oo') format('truetype'),
@@ -88,7 +95,30 @@
     content: "\e914";
 }
 
+body {
+    font-family: "century gothic", arial, sans-serif;
+    font-weight: bold;
+}
 
+.md-button {
+    font-weight: bold;
+}
+
+.wnh-home-header {
+    font-family: "Big Noodle Too", impact, sans-serif;
+    height: 120px;
+    background-color: #324363;
+}
+.wnh-home-header-title {
+    color: #f89b30;
+    padding: 25px 0 0 25px;
+    font-size: 3rem;
+}
+.wnh-home-header-subtitle {
+    color: #4298d2;
+    padding: 0 0 0 50px;
+    font-size: 1.2rem;
+}
 
 .wnh-post {
 }
@@ -97,8 +127,8 @@
 }
 .wnh-post .vote-btn {
     position: absolute;
-    left: -10px;
-    top: -20px;
+    left: -22px;
+    top: -14px;
 }
 .wnh-post .hero-tag {
     color: #fff;
@@ -111,6 +141,7 @@
 
 .wnh-post .hero-tag.hero-color-multi {
     background-color: lightgrey;
+    color: #324363;
 }
 .wnh-post .hero-tag.hero-color-genji {
     background-color: rgb(160, 182, 138);
@@ -200,11 +231,8 @@
     border: 0;
 }
 
-.text-small {
+.hint {
+    padding-top: 5px;
     font-size: 0.8rem;
+    font-weight: normal;
 }
-md-chips.md-default-theme .md-chips, md-chips .md-chips {
-    box-shadow: none;
-}
-
-.st0{fill:red;color: red;}

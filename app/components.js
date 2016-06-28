@@ -5,18 +5,21 @@ angular.module('wnh.components', ['wnh.services'])
         templateUrl: 'post.html',
         controller: function ($scope, Database, Auth) {
             $scope.playof = this.playof;
+            $scope.voteIsHover = false;
+            $scope.hasVote = false;
+            $scope.author = null;
+
+            $scope.voteHover = function (isHover) {
+                $scope.voteIsHover = isHover;
+            };
 
             $scope.vote = function () {
                 Database.vote($scope.playof.$id, $scope.hasVote).then(function () {
-                    //TODO update UI
+                    $scope.hasVote = !$scope.hasVote;
                 }).catch(function (error) {
-                    //TODO handle failures / retry                        
+                    //TODO handle failures / retry
                 });
-                $scope.hasVote = !$scope.hasVote;
             };
-
-            $scope.hasVote = false;
-            $scope.author = null;
 
             //on init fetch vote state
             this.$onInit = function () {

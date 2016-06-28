@@ -5,12 +5,13 @@
 
     <div class="wnh-post-content">
         <md-card-actions layout="row" layout-align="start center">
-            <md-button ng-class="{'vote-btn': true, 'md-fab': true, 'md-mini': true, 'md-primary': hasVote}"
-                       ng-click="vote()" aria-label="Vote">
+            <md-button ng-class="{'vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}" ng-mouseover="voteHover(true)" ng-mouseleave="voteHover(false)" class="md-warn" ng-click="vote()" aria-label="Vote">
                 <md-tooltip md-direction="bottom">
                     Vote for this play of the game
                 </md-tooltip>
-                <md-icon>add</md-icon>
+                <md-icon ng-if="voteIsHover && !hasVote">add</md-icon>
+                <md-icon ng-if="voteIsHover && hasVote">remove</md-icon>
+                <span ng-if="!voteIsHover">{{playof.votesCount}}</span>
             </md-button>
             <span flex></span>
 

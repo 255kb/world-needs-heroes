@@ -1,14 +1,31 @@
-<md-toolbar ng-controller="ToolbarCtrl" ng-cloak>
+<div class="wnh-home-header">
+    <div class="wnh-home-header-title">World Needs Heroes</div>
+    <div class="wnh-home-header-subtitle">Vote for the best play of the game</div>
+</div>
+<md-toolbar ng-controller="ToolbarCtrl" class="md-primary" ng-cloak>
     <div class="md-toolbar-tools">
-        <md-input-container style="margin-right: 10px;">
-            <md-select ng-model="currentFilters.timeframe" aria-label="timeframe">
-                <md-option ng-repeat="timeframe in timeframes" value="{{timeframe.filter}}"
-                           ng-selected="currentFilters.timeframe==timeframe.filter">{{timeframe.title}}
-                </md-option>
-            </md-select>
-        </md-input-container>
+        <md-menu>
+            <md-button aria-label="Open timeframe filter menu" ng-click="openMenu($mdOpenMenu, $event)">
+                <md-icon md-menu-origin>access_time</md-icon>
+                {{currentFiltersNames.timeframe}}
+                <md-tooltip md-direction="bottom">
+                    Filter by time
+                </md-tooltip>
+            </md-button>
+            <md-menu-content width="3">
+                <md-menu-item ng-repeat="timeframe in timeframes">
+                    <md-button ng-click="timeframeFilter(timeframe.filter)"
+                               ng-class="{'md-warn': timeframe.filter===currentFilters.timeframe}">
+                        <md-icon ng-if="timeframe.filter===currentFilters.timeframe">check</md-icon>
+                        {{timeframe.title}}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
         <span flex></span>
-        <md-button class="md-raised" ng-click="showPostDialog()">
+
+        <md-button class="md-raised md-accent" ng-click="showPostDialog()">
             Post
         </md-button>
     </div>

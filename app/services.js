@@ -107,7 +107,7 @@ angular.module('wnh.services', [])
             getPlayof: function (filters) {
                 //TODO filter
                 //TODO get voted or not (add to item)
-                return $firebaseArray(firebaseDatabaseInstance.ref('posts'));
+                return $firebaseArray(firebaseDatabaseInstance.ref('posts').orderByChild('votesCount'));
             }
         };
     }]);
