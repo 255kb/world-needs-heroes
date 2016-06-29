@@ -27,7 +27,9 @@ angular.module('wnh.services', [])
                 'mercy': {id: 'mercy', name: 'Mercy'},
                 'symmetra': {id: 'symmetra', name: 'Symmetra'},
                 'zenyatta': {id: 'zenyatta', name: 'Zenyatta'}
-            }
+            },
+            itemsPerPage: 2,//TODO switch to 5
+            overallLimit: 300
         };
     }])
 
@@ -53,16 +55,14 @@ angular.module('wnh.services', [])
         };
     }])
 
-    .factory('Database', ['Auth', '$firebaseArray', function (Auth, $firebaseArray) {
+    .factory('Database', ['Auth', 'Utils', '$firebaseArray', function (Auth, Utils, $firebaseArray) {
         var firebaseDatabaseInstance = firebase.database();
 
         return {
             getProfile: function (userId) {
                 var currentUserId = (Auth.getUser() && Auth.getUser().uid) || userId;
 
-                if (currentUserId) {
-                    return firebaseDatabaseInstance.ref('profile/' + currentUserId).once('value');
-                }
+                return firebaseDatabaseInstance.ref('profile/' + currentUserId).once('value');
             },
             saveProfile: function (data) {
                 if (Auth.getUser()) {
@@ -73,6 +73,7 @@ angular.module('wnh.services', [])
                 if (Auth.getUser()) {
                     data.userId = Auth.getUser().uid;
                     data.votesCount = 0;
+                    data.postedAt = firebase.database.ServerValue.TIMESTAMP;
 
                     var newPost = firebaseDatabaseInstance.ref('posts').push();
                     newPost.set(data).then(function (result) {
@@ -105,9 +106,19 @@ angular.module('wnh.services', [])
                 }
             },
             getPlayof: function (filters) {
-                //TODO filter
-                //TODO get voted or not (add to item)
-                return $firebaseArray(firebaseDatabaseInstance.ref('posts').orderByChild('votesCount'));
+                var postsRef = firebaseDatabaseInstance.ref('posts'),
+                    //start in past, end now (timestamp order is inverted)
+                    startTime = 0, endTime = moment().valueOf();
+
+                if (filters.timeframe === 'all') {
+                    return postsRef.orderByChild('votesCount').limitToLast(Utils.overallLimit);
+                } else if (filters.timeframe === 'day') {
+                    startTime = 1467227272297 /*moment().subtract(1, 'days').valueOf(); */;//TODO replace by substract 1 day
+                } else if (filters.timeframe === 'week') {
+                    startTime = moment().subtract(7, 'days').valueOf();
+                }
+
+                return postsRef.orderByChild('postedAt').startAt(startTime).endAt(endTime);
             }
         };
     }]);

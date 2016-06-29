@@ -2,13 +2,16 @@
   "rules": {
     "posts": {
       ".read": true,
-      ".indexOn": ["votesCount"],
+      ".indexOn": ["postedAt", "votesCount"],
       "$postId": {
         //post author has right to create, anyone can update (except validation below)
         ".write": "(auth.uid === newData.child('userId').val() && !data.exists()) || (auth !== null && data.exists())",
         "votesCount": {
           //need a number, equal to existing data +/- 1, only if adding or removing votes items
           ".validate": "(!data.exists() && newData.val() === 0) || (data.exists() && ( (newData.val() === data.val() + 1 && newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && !data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists())  || (newData.val() === data.val() - 1 && !newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists()) ))"
+        },
+        "postedAt": {
+          ".validate": "newData.isNumber() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val() && newData.val() === now) )"
         },
         "userId": {
           ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"

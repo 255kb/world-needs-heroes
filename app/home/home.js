@@ -18,13 +18,12 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
             }
         };
 
+        $scope.playofList = [];
         $scope.timeframes = [
             {filter: 'day', title: 'Today'},
             {filter: 'week', title: 'Last week'},
-            {filter: 'month', title: 'Last month'},
             {filter: 'all', title: 'Overall'}
         ];
-
         $scope.currentFilters = {
             timeframe: 'day',
             hero: ''
@@ -43,5 +42,18 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
             $scope.currentFiltersNames.timeframe = getTimeframeName(timeframe);
         };
 
-        $scope.playofList = Database.getPlayof($scope.currentFilters);
+        $scope.showMore = function () {
+            //TODO create local limit
+            //$scope.currentFilters.page++;
+        };
+
+        $scope.$watchCollection('currentFilters', function (newFilters, oldFilters) {
+            //TODO show loading thing
+            $scope.playofList = [];
+            
+            Database.getPlayof($scope.currentFilters).on('child_added', function (post, previousPost) {
+                //TODO remove loading thing after first (prev = null)
+                $scope.playofList.unshift(post.val());
+            });
+        });
     }]);
