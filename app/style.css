@@ -106,17 +106,17 @@ body {
 
 .wnh-home-header {
     font-family: "Big Noodle Too", impact, sans-serif;
-    height: 120px;
+    /*height: 120px;*/
     background-color: #324363;
 }
 .wnh-home-header-title {
     color: #f89b30;
-    padding: 25px 0 0 25px;
+    padding: 25px 0 0 50px;
     font-size: 3rem;
 }
 .wnh-home-header-subtitle {
     color: #4298d2;
-    padding: 0 0 0 50px;
+    padding: 0 0 0 75px;
     font-size: 1.2rem;
 }
 
@@ -137,6 +137,12 @@ body {
 }
 .wnh-post .hero-icon {
     font-size: 32px;
+}
+.hero-icon--big {
+    font-size: 24px;
+}
+.hero-icon--margin-right {
+    margin-right: 5px;
 }
 
 .wnh-post .hero-tag.hero-color-multi {
@@ -235,4 +241,14 @@ body {
     padding-top: 5px;
     font-size: 0.8rem;
     font-weight: normal;
+}
+
+.progress-container {
+    height: 50px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.show-more {
+    text-align: center;
 }

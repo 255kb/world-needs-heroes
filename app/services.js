@@ -28,7 +28,7 @@ angular.module('wnh.services', [])
                 'symmetra': {id: 'symmetra', name: 'Symmetra'},
                 'zenyatta': {id: 'zenyatta', name: 'Zenyatta'}
             },
-            itemsPerPage: 2,//TODO switch to 5
+            itemsPerPage: 5,
             overallLimit: 300
         };
     }])
@@ -42,9 +42,6 @@ angular.module('wnh.services', [])
         });
 
         return {
-            getInstance: function () {
-                return firebaseAuthInstance;
-            },
             getUser: function () {
                 return firebaseUser;
             },
@@ -105,20 +102,20 @@ angular.module('wnh.services', [])
                     return firebaseDatabaseInstance.ref('votes/' + postId + '/' + Auth.getUser().uid).once('value');
                 }
             },
-            getPlayof: function (filters) {
+            getPlayof: function (timeframe) {
                 var postsRef = firebaseDatabaseInstance.ref('posts'),
                     //start in past, end now (timestamp order is inverted)
                     startTime = 0, endTime = moment().valueOf();
 
-                if (filters.timeframe === 'all') {
-                    return postsRef.orderByChild('votesCount').limitToLast(Utils.overallLimit);
-                } else if (filters.timeframe === 'day') {
-                    startTime = 1467227272297 /*moment().subtract(1, 'days').valueOf(); */;//TODO replace by substract 1 day
-                } else if (filters.timeframe === 'week') {
+                if (timeframe === 'all') {
+                    return $firebaseArray(postsRef.orderByChild('votesCount').limitToLast(Utils.overallLimit));
+                } else if (timeframe === 'day') {
+                    startTime = moment().subtract(1, 'days').valueOf();
+                } else if (timeframe === 'week') {
                     startTime = moment().subtract(7, 'days').valueOf();
                 }
 
-                return postsRef.orderByChild('postedAt').startAt(startTime).endAt(endTime);
+                return $firebaseArray(postsRef.orderByChild('postedAt').startAt(startTime).endAt(endTime));
             }
         };
     }]);

@@ -18,7 +18,8 @@
                 <label>Hero</label>
                 <md-select required ng-model="newPost.hero">
                     <md-option ng-repeat="hero in heroesList" value="{{hero.id}}">
-                        {{hero.name}}
+                        <md-icon ng-if="hero.id === 'multi'">grade</md-icon>
+                        <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big" ng-if="hero.id !== 'multi'"></md-icon> {{hero.name}}
                     </md-option>
                 </md-select>
                 <div class="hint">Select "Multiple heroes" if more than one are displayed in the video</div>

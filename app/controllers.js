@@ -129,6 +129,7 @@ angular.module('wnh.controllers', [])
                                     videoId = $scope.newPost.videoLink;
                                 }
 
+                                //TODO check if valid id
                                 if (videoId) {
                                     var data = {youtubeId: videoId, hero: $scope.newPost.hero};
                                     if ($scope.newPost.description) {

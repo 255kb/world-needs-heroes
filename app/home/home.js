@@ -9,28 +9,38 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         });
     }])
 
-    .controller('HomeCtrl', ['$scope', 'Database', function ($scope, Database) {
+    .controller('HomeCtrl', ['$scope', 'Database', 'Utils', function ($scope, Database, Utils) {
         var getTimeframeName = function (timeframe) {
-            for (var index = 0; index < $scope.timeframes.length; index++) {
-                if ($scope.timeframes[index].filter === timeframe) {
-                    return $scope.timeframes[index].title;
+                for (var index = 0; index < $scope.timeframes.length; index++) {
+                    if ($scope.timeframes[index].filter === timeframe) {
+                        return $scope.timeframes[index].title;
+                    }
                 }
-            }
-        };
+            },
+            increaseLimit = function () {
+                $scope.page++;
+                $scope.limit = $scope.page * Utils.itemsPerPage;
+            },
+            resetLimit = function () {
+                $scope.page = 1;
+                $scope.limit = $scope.page * Utils.itemsPerPage;
+            };
 
-        $scope.playofList = [];
+        resetLimit();
+
         $scope.timeframes = [
-            {filter: 'day', title: 'Today'},
             {filter: 'week', title: 'Last week'},
+            {filter: 'day', title: 'Today'},
             {filter: 'all', title: 'Overall'}
         ];
+
+        $scope.heroes = Utils.heroesList;
         $scope.currentFilters = {
-            timeframe: 'day',
+            timeframe: 'week',
             hero: ''
         };
         $scope.currentFiltersNames = {
-            timeframe: 'Today',
-            hero: ''
+            timeframe: 'Last week'
         };
 
         $scope.openMenu = function ($mdOpenMenu, ev) {
@@ -42,18 +52,16 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
             $scope.currentFiltersNames.timeframe = getTimeframeName(timeframe);
         };
 
+        $scope.heroFilter = function (hero) {
+            $scope.currentFilters.hero = hero;
+        };
+
         $scope.showMore = function () {
-            //TODO create local limit
-            //$scope.currentFilters.page++;
+            increaseLimit();
         };
 
         $scope.$watchCollection('currentFilters', function (newFilters, oldFilters) {
-            //TODO show loading thing
-            $scope.playofList = [];
-            
-            Database.getPlayof($scope.currentFilters).on('child_added', function (post, previousPost) {
-                //TODO remove loading thing after first (prev = null)
-                $scope.playofList.unshift(post.val());
-            });
+            resetLimit();
+            $scope.playofList = Database.getPlayof($scope.currentFilters.timeframe);
         });
     }]);
