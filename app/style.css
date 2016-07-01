@@ -122,8 +122,16 @@ body {
 
 .wnh-post {
 }
-.wnh-post-content {
+.wnh-post__content {
     position: relative;
+}
+.wnh-post__author {
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+.wnh-post__author-tag {
+    font-weight: bold;
+    color: #4298d2;
 }
 .wnh-post .vote-btn {
     position: absolute;

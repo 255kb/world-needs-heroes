@@ -2,12 +2,13 @@
     <div class="wnh-home-header-title">World Needs Heroes</div>
     <div class="wnh-home-header-subtitle">Vote for the best play of the game</div>
 </div>
+
 <md-toolbar ng-controller="ToolbarCtrl" class="md-primary" ng-cloak>
     <div class="md-toolbar-tools">
         <md-menu>
             <md-button aria-label="Open timeframe filter menu" ng-click="openMenu($mdOpenMenu, $event)">
                 <md-icon md-menu-origin>access_time</md-icon>
-                {{currentFiltersNames.timeframe}}
+                {{currentTimeframeName}}
                 <md-tooltip md-direction="bottom">
                     Filter by time
                 </md-tooltip>
@@ -15,8 +16,8 @@
             <md-menu-content width="3">
                 <md-menu-item ng-repeat="timeframe in timeframes">
                     <md-button ng-click="timeframeFilter(timeframe.filter)"
-                               ng-class="{'md-warn': timeframe.filter===currentFilters.timeframe}">
-                        <md-icon ng-if="timeframe.filter===currentFilters.timeframe">check</md-icon>
+                               ng-class="{'md-warn': timeframe.filter === currentTimeframe}">
+                        <md-icon ng-if="timeframe.filter === currentTimeframe">check</md-icon>
                         {{timeframe.title}}
                     </md-button>
                 </md-menu-item>
@@ -25,10 +26,10 @@
 
         <md-menu>
             <md-button aria-label="Open hero filter menu" ng-click="openMenu($mdOpenMenu, $event)">
-                <span ng-if="currentFilters.hero === ''"><md-icon md-menu-origin>done</md-icon>All heroes</span>
-                <md-icon md-menu-origin ng-if="currentFilters.hero === 'multi'">grade</md-icon>
-                <md-icon class="ohi-{{currentFilters.hero}} hero-icon hero-icon--big hero-icon--margin-right" ng-if="currentFilters.hero !== 'multi'"></md-icon>
-                {{currentFilters.hero | heroName}}
+                <span ng-if="currentHero === ''"><md-icon md-menu-origin>done</md-icon>All heroes</span>
+                <md-icon md-menu-origin ng-if="currentHero === 'multi'">grade</md-icon>
+                <md-icon class="ohi-{{currentHero}} hero-icon hero-icon--big hero-icon--margin-right" ng-if="currentHero !== 'multi'"></md-icon>
+                {{currentHero | heroName}}
                 <md-tooltip md-direction="bottom">
                     Filter by hero
                 </md-tooltip>
@@ -41,7 +42,7 @@
                 </md-menu-item>
                 <md-menu-item ng-repeat="hero in heroes">
                     <md-button ng-click="heroFilter(hero.id)"
-                               ng-class="{'md-warn': hero.id===currentFilters.hero}">
+                               ng-class="{'md-warn': hero.id === currentHero}">
                         <md-icon md-menu-origin ng-if="hero.id === 'multi'">grade</md-icon>
                         <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big" ng-if="hero.id !== 'multi'"></md-icon> {{hero.filterName || hero.name}}
                     </md-button>
@@ -62,7 +63,7 @@
         <div ng-if="!playofList.length" class="progress-container">
             <md-progress-circular md-mode="indeterminate" class="md-warn"></md-progress-circular>
         </div>
-        <div ng-repeat="playof in playofList | orderBy: '-votesCount' | limitTo: limit | filter: {hero: currentFilters.hero} as playofListFiltered">
+        <div ng-repeat="playof in playofList | orderBy: '-votesCount' | limitTo: limit | filter: {hero: currentHero} as playofListFiltered">
             <wnh-post playof="playof"></wnh-post>
         </div>
         <div ng-if="(playofList.length && playofList.length > limit) || (playofListFiltered.length && playofListFiltered.length > limit)" ng-click="showMore()" class="show-more">

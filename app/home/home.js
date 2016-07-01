@@ -9,7 +9,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         });
     }])
 
-    .controller('HomeCtrl', ['$scope', 'Database', 'Utils', function ($scope, Database, Utils) {
+    .controller('HomeCtrl', ['$scope', 'Auth', 'Database', 'Utils', function ($scope, Auth, Database, Utils) {
         var getTimeframeName = function (timeframe) {
                 for (var index = 0; index < $scope.timeframes.length; index++) {
                     if ($scope.timeframes[index].filter === timeframe) {
@@ -36,40 +36,37 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         ];
 
         $scope.heroes = Utils.heroesList;
-        $scope.currentFilters = {
-            timeframe: 'week',
-            hero: ''
-        };
-        $scope.currentFiltersNames = {
-            timeframe: 'Last week'
-        };
+        $scope.currentTimeframe = 'week';
+        $scope.currentHero = '';
+        $scope.currentTimeframeName = 'Last week';
 
         $scope.openMenu = function ($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };
 
         $scope.timeframeFilter = function (timeframe) {
-            $scope.currentFilters.timeframe = timeframe;
-            $scope.currentFiltersNames.timeframe = getTimeframeName(timeframe);
+            $scope.currentTimeframe = timeframe;
+            $scope.currentTimeframeName = getTimeframeName(timeframe);
         };
 
         $scope.heroFilter = function (hero) {
-            $scope.currentFilters.hero = hero;
+            $scope.currentHero = hero;
         };
 
         $scope.showMore = function () {
             increaseLimit();
         };
 
-        $scope.$watchCollection('currentFilters', function (newFilters, oldFilters) {
+        $scope.$watch('currentTimeframe', function (newFilters, oldFilters) {
             resetLimit();
+            $scope.playofList = [];
             
-            Database.getPlayof($scope.currentFilters.timeframe).on('child_added', function (post) {
+            Database.getPlayof($scope.currentTimeframe).on('child_added', function (post) {
+                var postObject = post.val();
+                postObject.key = post.key;
                 $scope.$apply(function () {
-                    var postObject = post.val();
-                    postObject.key = post.key;
                     $scope.playofList.push(postObject);
-                })
+                });
             });
         });
     }]);

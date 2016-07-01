@@ -57,9 +57,7 @@ angular.module('wnh.services', [])
 
         return {
             getProfile: function (userId) {
-                var currentUserId = (Auth.getUser() && Auth.getUser().uid) || userId;
-
-                return firebaseDatabaseInstance.ref('profile/' + currentUserId).once('value');
+                return firebaseDatabaseInstance.ref('profile/' + userId).once('value');
             },
             saveProfile: function (data) {
                 if (Auth.getUser()) {

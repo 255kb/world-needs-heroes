@@ -3,9 +3,11 @@
         <youtube-video video-id="playof.youtubeId" class="embed-responsive-item" player="ytplayer"></youtube-video>
     </div>
 
-    <div class="wnh-post-content">
+    <div class="wnh-post__content">
         <md-card-actions layout="row" layout-align="start center">
-            <md-button ng-class="{'vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}" ng-mouseover="voteHover(true)" ng-mouseleave="voteHover(false)" class="md-warn" ng-click="vote()" aria-label="Vote">
+            <md-button ng-class="{'vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}"
+                       ng-mouseover="voteHover(true)" ng-mouseleave="voteHover(false)" class="md-warn" ng-click="vote()"
+                       aria-label="Vote">
                 <md-tooltip md-direction="bottom">
                     Vote for this play of the game
                 </md-tooltip>
@@ -15,19 +17,24 @@
             </md-button>
             <span flex></span>
 
-            <div class="hero-tag hero-color-{{playof.hero}}"><span class="ohi-{{playof.hero}} hero-icon"></span> {{playof.hero | heroName}}</div>
+            <div class="hero-tag hero-color-{{playof.hero}}"><span class="ohi-{{playof.hero}} hero-icon"></span>
+                {{playof.hero | heroName}}
+            </div>
         </md-card-actions>
 
         <md-card-content>
             <p ng-if="playof.description">{{playof.description}}</p>
-            <div ng-if="author && author.name" class="text-small">
-                Posted by {{author.name}}
-                <span ng-if="author.battletag">
-                    <md-tooltip md-direction="bottom">
-                        BattleTag
-                    </md-tooltip>
-                    ({{author.battletag}})
+            <div ng-if="author && author.name" class="wnh-post__author">
+                Posted by
+                <span ng-if="currentUserId !== playof.userId">{{author.name}}
+                    <span ng-if="author.battletag" class="wnh-post__author-tag">
+                        <md-tooltip md-direction="bottom">
+                            BattleTag
+                        </md-tooltip>
+                        ({{author.battletag}})
+                    </span>
                 </span>
+                <span ng-if="currentUserId === playof.userId">you {{currentUserName}}</span>
             </div>
         </md-card-content>
     </div>

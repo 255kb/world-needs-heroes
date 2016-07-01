@@ -3,11 +3,13 @@
 angular.module('wnh.components', ['wnh.services'])
     .component('wnhPost', {
         templateUrl: 'post.html',
-        controller: function ($scope, Database, Auth) {
+        controller: function ($rootScope, $scope, Database, Auth) {
             $scope.playof = this.playof;
             $scope.voteIsHover = false;
             $scope.hasVote = false;
             $scope.author = null;
+            $scope.currentUserId = Auth.getUser().uid;
+            $scope.currentUserName = Auth.getUser().displayName;
 
             $scope.voteHover = function (isHover) {
                 $scope.voteIsHover = isHover;
@@ -16,6 +18,7 @@ angular.module('wnh.components', ['wnh.services'])
             $scope.vote = function () {
                 Database.vote($scope.playof.key, $scope.hasVote).then(function () {
                     $scope.hasVote = !$scope.hasVote;
+                    ($scope.hasVote) ? $scope.playof.votesCount++ : $scope.playof.votesCount--;
                 }).catch(function (error) {
                     //TODO handle failures / retry
                 });
