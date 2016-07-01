@@ -14,7 +14,7 @@ angular.module('wnh.components', ['wnh.services'])
             };
 
             $scope.vote = function () {
-                Database.vote($scope.playof.$id, $scope.hasVote).then(function () {
+                Database.vote($scope.playof.key, $scope.hasVote).then(function () {
                     $scope.hasVote = !$scope.hasVote;
                 }).catch(function (error) {
                     //TODO handle failures / retry
@@ -24,7 +24,7 @@ angular.module('wnh.components', ['wnh.services'])
             //on init fetch vote state
             this.$onInit = function () {
                 if (Auth.getUser()) {
-                    Database.hasVote($scope.playof.$id).then(function (userVote) {
+                    Database.hasVote($scope.playof.key).then(function (userVote) {
                         if (userVote.val()) {
                             $scope.hasVote = true;
                         }

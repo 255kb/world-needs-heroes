@@ -52,7 +52,7 @@ angular.module('wnh.services', [])
         };
     }])
 
-    .factory('Database', ['Auth', 'Utils', '$firebaseArray', function (Auth, Utils, $firebaseArray) {
+    .factory('Database', ['Auth', 'Utils', function (Auth, Utils) {
         var firebaseDatabaseInstance = firebase.database();
 
         return {
@@ -108,14 +108,14 @@ angular.module('wnh.services', [])
                     startTime = 0, endTime = moment().valueOf();
 
                 if (timeframe === 'all') {
-                    return $firebaseArray(postsRef.orderByChild('votesCount').limitToLast(Utils.overallLimit));
+                    return postsRef.orderByChild('votesCount').limitToLast(Utils.overallLimit);
                 } else if (timeframe === 'day') {
                     startTime = moment().subtract(1, 'days').valueOf();
                 } else if (timeframe === 'week') {
                     startTime = moment().subtract(7, 'days').valueOf();
                 }
 
-                return $firebaseArray(postsRef.orderByChild('postedAt').startAt(startTime).endAt(endTime));
+                return postsRef.orderByChild('postedAt').startAt(startTime).endAt(endTime);
             }
         };
     }]);

@@ -28,6 +28,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
 
         resetLimit();
 
+        $scope.playofList = [];
         $scope.timeframes = [
             {filter: 'week', title: 'Last week'},
             {filter: 'day', title: 'Today'},
@@ -62,6 +63,13 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
 
         $scope.$watchCollection('currentFilters', function (newFilters, oldFilters) {
             resetLimit();
-            $scope.playofList = Database.getPlayof($scope.currentFilters.timeframe);
+            
+            Database.getPlayof($scope.currentFilters.timeframe).on('child_added', function (post) {
+                $scope.$apply(function () {
+                    var postObject = post.val();
+                    postObject.key = post.key;
+                    $scope.playofList.push(postObject);
+                })
+            });
         });
     }]);
