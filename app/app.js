@@ -5,6 +5,7 @@ angular.module('wnh', [
     'firebase',
     'youtube-embed',
     'ngMaterial',
+    'ngMessages',
     'ngRoute',
     'wnh.home',
     'wnh.controllers',

@@ -42,7 +42,7 @@ angular.module('wnh.controllers', [])
          };*/
     }])
 
-    .controller('ToolbarCtrl', ['$scope', '$mdDialog', 'Auth', 'Database', function ($scope, $mdDialog, Auth, Database) {
+    .controller('ToolbarCtrl', ['$scope', '$mdDialog', 'Auth', 'Database', function ($scope, $mdDialog, Auth) {
         var showLoginDialog = function (event) {
             $mdDialog.show({
                 controller: function DialogController($scope, $mdDialog, Auth, Database) {
@@ -113,11 +113,16 @@ angular.module('wnh.controllers', [])
         $scope.showPostDialog = function (event) {
             if (Auth.getUser()) {
                 $mdDialog.show({
-                    controller: function DialogController($scope, $mdDialog, Utils) {
+                    controller: function DialogController($scope, $mdDialog, Utils, Youtube, $mdToast) {
                         $scope.heroesList = Utils.heroesList;
+                        $scope.invalidId = false;
                         $scope.newPost = {
                             videoLink: '',
                             hero: ''
+                        };
+
+                        $scope.videoLinkChange = function () {
+                            $scope.invalidId = false;
                         };
 
                         $scope.post = function () {
@@ -125,23 +130,36 @@ angular.module('wnh.controllers', [])
                                 var regex = $scope.newPost.videoLink.match(/(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/i), videoId = null;
                                 if (regex && regex[1].length === 11) {
                                     videoId = regex[1];
-                                } else if ($scope.newPost.videoLink.length === 11) {
+                                } else {
                                     videoId = $scope.newPost.videoLink;
                                 }
 
-                                //TODO check if valid id
-                                if (videoId) {
-                                    var data = {youtubeId: videoId, hero: $scope.newPost.hero};
-                                    if ($scope.newPost.description) {
-                                        data.description = $scope.newPost.description;
-                                    }
-                                    Database.newPost(data);
+                                if (videoId && videoId.length === 11) {
+                                    //check if valid id with YT API
+                                    Youtube.getVideoInfo(videoId).then(function successCallback(response) {
+                                        if (response.data.items.length) {
+                                            var data = {youtubeId: videoId, hero: $scope.newPost.hero};
+                                             if ($scope.newPost.description) {
+                                             data.description = $scope.newPost.description;
+                                             }
+                                             Database.newPost(data);
+                                            
+                                            //TODO redirect to single item page
+                                            
+                                            $mdDialog.hide();
+                                        } else {
+                                            $scope.invalidId = true;
+                                        }
+                                    }, function errorCallback(error) {
+                                        $mdToast.show(
+                                            $mdToast.simple()
+                                                .textContent('Error, please try again later')
+                                                .hideDelay(3000)
+                                        );
+                                    });
                                 } else {
-                                    //TODO show error if no valid id
+                                    $scope.invalidId = true;
                                 }
-                                $mdDialog.hide();
-                            } else {
-                                //TODO show error message if empty
                             }
                         };
 

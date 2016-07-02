@@ -2,6 +2,25 @@
 
 angular.module('wnh.services', [])
 
+    .factory('Auth', ['$firebaseAuth', function ($firebaseAuth) {
+        var firebaseAuthInstance = $firebaseAuth(),
+            firebaseUser = null;
+
+        firebaseAuthInstance.$onAuthStateChanged(function (user) {
+            firebaseUser = user;
+        });
+
+        return {
+            getUser: function () {
+                return firebaseUser;
+            },
+            providerLogin: function (providerName) {
+                var provider = new firebase.auth[providerName + 'AuthProvider']();
+                return firebaseAuthInstance.$signInWithPopup(provider);
+            }
+        };
+    }])
+
     .factory('Utils', [function () {
         return {
             heroesList: {
@@ -30,6 +49,20 @@ angular.module('wnh.services', [])
             },
             itemsPerPage: 5,
             overallLimit: 300
+        };
+    }])
+
+    .factory('Youtube', ['$http', function ($http) {
+        var youtubeApiKey = 'AIzaSyAyY4cymf3FIT7lOGltKv1WthHZlR7npkI',
+            youtubeApiUrl = 'https://www.googleapis.com/youtube/v3/';
+
+        return {
+            getVideoInfo: function (videoId) {
+                return $http({
+                    method: 'GET',
+                    url: youtubeApiUrl + 'videos?id=' + videoId + '&key=' + youtubeApiKey + '&fields=items(id,snippet(title,thumbnails))&part=snippet'
+                });
+            }
         };
     }])
 
@@ -90,7 +123,7 @@ angular.module('wnh.services', [])
                             updates['posts/' + postId + '/votesCount'] = currentCount.val() + 1;
                             updates['votes/' + postId + '/' + Auth.getUser().uid] = firebase.database.ServerValue.TIMESTAMP;
                         }
-                        
+
                         return firebaseDatabaseInstance.ref().update(updates);
                     });
                 }
@@ -102,7 +135,7 @@ angular.module('wnh.services', [])
             },
             getPlayof: function (timeframe) {
                 var postsRef = firebaseDatabaseInstance.ref('posts'),
-                    //start in past, end now (timestamp order is inverted)
+                //start in past, end now (timestamp order is inverted)
                     startTime = 0, endTime = moment().valueOf();
 
                 if (timeframe === 'all') {
