@@ -60,7 +60,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         $scope.$watch('currentTimeframe', function (newFilters, oldFilters) {
             resetLimit();
             $scope.playofList = [];
-            
+
             Database.getPlayof($scope.currentTimeframe).on('child_added', function (post) {
                 var postObject = post.val();
                 postObject.key = post.key;

@@ -103,6 +103,10 @@ body {
 .md-button {
     font-weight: bold;
 }
+md-card md-card-header:last-child md-card-avatar{
+    margin-right: 12px;
+    margin-left: 0;
+}
 
 .wnh-home-header {
     font-family: "Big Noodle Too", impact, sans-serif;
@@ -126,11 +130,9 @@ body {
     position: relative;
 }
 .wnh-post__author {
-    font-size: 0.8rem;
-    font-weight: normal;
+    font-weight: bold;
 }
 .wnh-post__author-tag {
-    font-weight: bold;
     color: #4298d2;
 }
 .wnh-post .vote-btn {

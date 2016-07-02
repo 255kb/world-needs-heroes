@@ -8,8 +8,7 @@ angular.module('wnh.components', ['wnh.services'])
             $scope.voteIsHover = false;
             $scope.hasVote = false;
             $scope.author = null;
-            $scope.currentUserId = Auth.getUser().uid;
-            $scope.currentUserName = Auth.getUser().displayName;
+            $scope.currentUserId = Auth.getUser() && Auth.getUser().uid;
 
             $scope.voteHover = function (isHover) {
                 $scope.voteIsHover = isHover;

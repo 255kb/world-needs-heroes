@@ -91,7 +91,7 @@ angular.module('wnh.controllers', [])
                         Database.saveProfile({
                             name: $scope.onboarding.displayName,
                             battletag: $scope.onboarding.battleTag,
-                            picture: '',
+                            picture: Auth.getUser().photoURL,
                             onboarding: true
                         });
                         $mdDialog.hide();

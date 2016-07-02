@@ -24,18 +24,27 @@
 
         <md-card-content>
             <p ng-if="playof.description">{{playof.description}}</p>
-            <div ng-if="author && author.name" class="wnh-post__author">
-                Posted by
-                <span ng-if="currentUserId !== playof.userId">{{author.name}}
+        </md-card-content>
+
+        <md-card-header ng-if="author && author.name">
+            <md-card-avatar>
+                <img class="md-user-avatar" ng-src="{{author.picture}}">
+            </md-card-avatar>
+            <md-card-header-text>
+                <span class="md-title wnh-post__author">
+                    Posted by
+                    <span ng-if="currentUserId !== playof.userId">{{author.name}}</span>
+                    <span ng-if="currentUserId === playof.userId">you</span>
+                </span>
+                <span class="md-subhead">
                     <span ng-if="author.battletag" class="wnh-post__author-tag">
                         <md-tooltip md-direction="bottom">
                             BattleTag
                         </md-tooltip>
-                        ({{author.battletag}})
+                        {{author.battletag}}
                     </span>
                 </span>
-                <span ng-if="currentUserId === playof.userId">you {{currentUserName}}</span>
-            </div>
-        </md-card-content>
+            </md-card-header-text>
+        </md-card-header>
     </div>
 </md-card>
