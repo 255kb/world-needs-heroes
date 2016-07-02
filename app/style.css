@@ -1,16 +1,15 @@
 @font-face {
     font-family: 'Big Noodle Too';
-    src:url('fonts/big-noodle.ttf') format('truetype');
+    src: url('fonts/big-noodle.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'overwatch-heroes';
-    src:
-            url('fonts/overwatch-heroes.ttf?rql2oo') format('truetype'),
-            url('fonts/overwatch-heroes.woff?rql2oo') format('woff'),
-            url('fonts/overwatch-heroes.svg?rql2oo#overwatch-heroes') format('svg');
+    src: url('fonts/overwatch-heroes.ttf?rql2oo') format('truetype'),
+    url('fonts/overwatch-heroes.woff?rql2oo') format('woff'),
+    url('fonts/overwatch-heroes.svg?rql2oo#overwatch-heroes') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -34,63 +33,83 @@
 .ohi-bastion:before {
     content: "\e900";
 }
+
 .ohi-dva:before {
     content: "\e901";
 }
+
 .ohi-genji:before {
     content: "\e902";
 }
+
 .ohi-hanzo:before {
     content: "\e903";
 }
+
 .ohi-junkrat:before {
     content: "\e904";
 }
+
 .ohi-lucio:before {
     content: "\e905";
 }
+
 .ohi-mccree:before {
     content: "\e906";
 }
+
 .ohi-mei:before {
     content: "\e907";
 }
+
 .ohi-mercy:before {
     content: "\e908";
 }
+
 .ohi-pharah:before {
     content: "\e909";
 }
+
 .ohi-reaper:before {
     content: "\e90a";
 }
+
 .ohi-reinhardt:before {
     content: "\e90b";
 }
+
 .ohi-roadhog:before {
     content: "\e90c";
 }
+
 .ohi-soldier76:before {
     content: "\e90d";
 }
+
 .ohi-symmetra:before {
     content: "\e90e";
 }
+
 .ohi-torbjorn:before {
     content: "\e90f";
 }
+
 .ohi-tracer:before {
     content: "\e910";
 }
+
 .ohi-widowmaker:before {
     content: "\e911";
 }
+
 .ohi-winston:before {
     content: "\e912";
 }
+
 .ohi-zarya:before {
     content: "\e913";
 }
+
 .ohi-zenyatta:before {
     content: "\e914";
 }
@@ -100,29 +119,42 @@ body {
     font-weight: bold;
 }
 
+.footer {
+    font-size: 0.8rem;
+    text-align: center;
+    color: #b5b5b5;
+    text-align: center;
+    font-weight: normal;
+}
+
 .md-button {
     font-weight: bold;
 }
-md-card md-card-header:last-child md-card-avatar{
+
+md-card md-card-header:last-child md-card-avatar {
     margin-right: 12px;
     margin-left: 0;
 }
+
 .validation-msg {
     color: #c56d07;
     font-size: 0.8rem;
     font-weight: normal;
     text-align: center;
 }
+
 .wnh-home-header {
     font-family: "Big Noodle Too", impact, sans-serif;
     /*height: 120px;*/
     background-color: #324363;
 }
+
 .wnh-home-header-title {
     color: #f89b30;
     padding: 25px 0 0 50px;
     font-size: 3rem;
 }
+
 .wnh-home-header-subtitle {
     color: #4298d2;
     padding: 0 0 0 75px;
@@ -131,31 +163,39 @@ md-card md-card-header:last-child md-card-avatar{
 
 .wnh-post {
 }
+
 .wnh-post__content {
     position: relative;
 }
+
 .wnh-post__author {
     font-weight: bold;
 }
+
 .wnh-post__author-tag {
     color: #4298d2;
 }
+
 .wnh-post .vote-btn {
     position: absolute;
     left: -22px;
     top: -14px;
 }
+
 .wnh-post .hero-tag {
     color: #fff;
     padding: 4px 6px;
     border-radius: 3px;
 }
+
 .wnh-post .hero-icon {
     font-size: 32px;
 }
+
 .hero-icon--big {
     font-size: 24px;
 }
+
 .hero-icon--margin-right {
     margin-right: 5px;
 }
@@ -164,71 +204,91 @@ md-card md-card-header:last-child md-card-avatar{
     background-color: lightgrey;
     color: #324363;
 }
+
 .wnh-post .hero-tag.hero-color-genji {
     background-color: rgb(160, 182, 138);
 }
+
 .wnh-post .hero-tag.hero-color-mccree {
     background-color: rgb(183, 79, 55);
 }
+
 .wnh-post .hero-tag.hero-color-pharah {
     background-color: rgb(75, 115, 173);
 }
+
 .wnh-post .hero-tag.hero-color-reaper {
     background-color: rgb(65, 59, 59);
 }
+
 .wnh-post .hero-tag.hero-color-soldier76 {
     background-color: rgb(75, 92, 165);
 }
+
 .wnh-post .hero-tag.hero-color-tracer {
     background-color: rgb(251, 169, 41);
 }
+
 .wnh-post .hero-tag.hero-color-bastion {
     background-color: rgb(103, 115, 80);
 }
+
 .wnh-post .hero-tag.hero-color-hanzo {
     background-color: rgb(63, 58, 54);
 }
+
 .wnh-post .hero-tag.hero-color-junkrat {
     background-color: rgb(208, 160, 75);
 }
+
 .wnh-post .hero-tag.hero-color-mei {
     background-color: rgb(118, 143, 168);
 }
+
 .wnh-post .hero-tag.hero-color-torbjorn {
     background-color: rgb(188, 65, 54);
 }
+
 .wnh-post .hero-tag.hero-color-widowmaker {
     background-color: rgb(156, 130, 154);
 }
+
 .wnh-post .hero-tag.hero-color-dva {
     background-color: rgb(227, 142, 189);
 }
+
 .wnh-post .hero-tag.hero-color-reinhardt {
     background-color: rgb(109, 109, 114);
 }
+
 .wnh-post .hero-tag.hero-color-roadhog {
     background-color: rgb(186, 118, 99);
 }
+
 .wnh-post .hero-tag.hero-color-winston {
     background-color: rgb(63, 64, 60);
 }
+
 .wnh-post .hero-tag.hero-color-zarya {
     background-color: rgb(223, 70, 114);
 }
+
 .wnh-post .hero-tag.hero-color-lucio {
     background-color: rgb(136, 193, 60);
 }
+
 .wnh-post .hero-tag.hero-color-mercy {
     background-color: rgb(247, 245, 241);
     color: rgb(66, 51, 46);
 }
+
 .wnh-post .hero-tag.hero-color-symmetra {
     background-color: rgb(94, 189, 207);
 }
+
 .wnh-post .hero-tag.hero-color-zenyatta {
     background-color: rgb(210, 157, 116);
 }
-
 
 .embed-responsive {
     position: relative;
