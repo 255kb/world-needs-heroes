@@ -16,7 +16,7 @@
             <md-menu-content width="3">
                 <md-menu-item ng-repeat="timeframe in timeframes">
                     <md-button ng-click="timeframeFilter(timeframe.filter)"
-                               ng-class="{'md-warn': timeframe.filter === currentTimeframe}">
+                               ng-class="{'md-accent': timeframe.filter === currentTimeframe}">
                         <md-icon ng-if="timeframe.filter === currentTimeframe">check</md-icon>
                         {{timeframe.title}}
                     </md-button>
@@ -36,13 +36,13 @@
             </md-button>
             <md-menu-content width="3">
                 <md-menu-item>
-                    <md-button ng-click="heroFilter('')" ng-class="{'md-warn': hero.id === ''}">
+                    <md-button ng-click="heroFilter('')" ng-class="{'md-accent': hero.id === ''}">
                         <md-icon md-menu-origin>done</md-icon> All heroes
                     </md-button>
                 </md-menu-item>
                 <md-menu-item ng-repeat="hero in heroes">
                     <md-button ng-click="heroFilter(hero.id)"
-                               ng-class="{'md-warn': hero.id === currentHero}">
+                               ng-class="{'md-accent': hero.id === currentHero}">
                         <md-icon md-menu-origin ng-if="hero.id === 'multi'">grade</md-icon>
                         <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big" ng-if="hero.id !== 'multi'"></md-icon> {{hero.filterName || hero.name}}
                     </md-button>
@@ -61,16 +61,16 @@
 <md-content class="md-padding" layout="row" layout-align="center center">
     <div layout="column" flex-xs="100" flex-gt-xs="75" flex-gt-md="50">
         <div ng-if="!playofList.length" class="progress-container">
-            <md-progress-circular md-mode="indeterminate" class="md-warn"></md-progress-circular>
+            <md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>
         </div>
         <div ng-repeat="playof in playofList | orderBy: '-votesCount' | limitTo: limit | filter: {hero: currentHero} as playofListFiltered">
             <wnh-post playof="playof"></wnh-post>
         </div>
         <div ng-if="(playofList.length && playofList.length > limit) || (playofListFiltered.length && playofListFiltered.length > limit)" ng-click="showMore()" class="show-more">
-            <md-button class="md-warn">Show more</md-button>
+            <md-button class="md-accent">Show more</md-button>
         </div>
         <div ng-if="playofList.length && !playofListFiltered.length" class="show-more">
-            <md-subheader class="md-warn">There is no video in this category</md-subheader>
+            <md-subheader class="md-accent">There is no video in this category</md-subheader>
         </div>
     </div>
 </md-content>

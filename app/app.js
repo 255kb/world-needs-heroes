@@ -40,25 +40,6 @@ angular.module('wnh', [
 
     $mdThemingProvider.definePalette('accent', {
         '50': '#ffffff',
-        '100': '#fde5c9',
-        '200': '#fbcb92',
-        '300': '#f9a94d',
-        '400': '#f89b30',
-        '500': '#f78d12',
-        '600': '#e37d08',
-        '700': '#c56d07',
-        '800': '#a85d06',
-        '900': '#8a4c05',
-        'A100': '#ffffff',
-        'A200': '#fde5c9',
-        'A400': '#f89b30',
-        'A700': '#c56d07',
-        'contrastDefaultColor': 'light',
-        'contrastDarkColors': '50 A100'
-    });
-
-    $mdThemingProvider.definePalette('warn', {
-        '50': '#ffffff',
         '100': '#c1ddf0',
         '200': '#94c5e6',
         '300': '#5aa5d8',
@@ -72,6 +53,25 @@ angular.module('wnh', [
         'A200': '#c1ddf0',
         'A400': '#4298d2',
         'A700': '#236794',
+        'contrastDefaultColor': 'light',
+        'contrastDarkColors': '50 A100'
+    });
+
+    $mdThemingProvider.definePalette('warn', {
+        '50': '#ffffff',
+        '100': '#fde5c9',
+        '200': '#fbcb92',
+        '300': '#f9a94d',
+        '400': '#f89b30',
+        '500': '#f78d12',
+        '600': '#e37d08',
+        '700': '#c56d07',
+        '800': '#a85d06',
+        '900': '#8a4c05',
+        'A100': '#ffffff',
+        'A200': '#fde5c9',
+        'A400': '#f89b30',
+        'A700': '#c56d07',
         'contrastDefaultColor': 'light',
         'contrastDarkColors': '50 A100'
     });
