@@ -113,7 +113,7 @@ angular.module('wnh.controllers', [])
         $scope.showPostDialog = function (event) {
             if (Auth.getUser()) {
                 $mdDialog.show({
-                    controller: function DialogController($scope, $mdDialog, Utils, Youtube, $mdToast) {
+                    controller: function DialogController($scope, $mdDialog, Utils, Youtube, $mdToast, Database) {
                         $scope.heroesList = Utils.heroesList;
                         $scope.invalidId = false;
                         $scope.newPost = {
