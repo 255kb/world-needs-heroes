@@ -119,6 +119,10 @@ body {
     font-weight: bold;
 }
 
+.login-dialog {
+    text-align: center;
+}
+
 .footer {
     font-size: 0.8rem;
     text-align: center;

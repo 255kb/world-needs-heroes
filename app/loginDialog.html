@@ -9,10 +9,11 @@
         </div>
     </md-toolbar>
     <md-dialog-content>
-        <div class="md-dialog-content">
-            <p>You must log in to post, vote or comment</p>
-            <md-button class="md-raised md-primary" ng-click="login('Facebook')">Facebook</md-button>
-            <md-button class="md-raised md-primary" ng-click="login('Google')">Google</md-button>
+        <div class="md-dialog-content login-dialog">
+            <p>Please log in to post new play of the game and vote</p>
+            <div><md-button class="md-raised md-accent" ng-click="login('Facebook')">Facebook</md-button></div>
+            <div><md-button class="md-raised md-accent" ng-click="login('Twitter')">Twitter</md-button></div>
+            <div><md-button class="md-raised md-accent" ng-click="login('Google')">Google</md-button></div>
             <p class="md-caption">We will never use your data or sell them to third parties.</p>
         </div>
     </md-dialog-content>
