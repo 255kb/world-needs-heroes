@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('wnh.home', ['ngRoute', 'wnh.services'])
-
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'home/home.html',
@@ -9,7 +8,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         });
     }])
 
-    .controller('HomeCtrl', ['$rootScope', '$scope', 'Auth', 'Database', 'Utils', function ($rootScope, $scope, Auth, Database, Utils) {
+    .controller('HomeCtrl', ['$rootScope', '$scope', 'Auth', 'Database', 'Utils', 'Dialogs', function ($rootScope, $scope, Auth, Database, Utils, Dialogs) {
         var getTimeframeName = function (timeframe) {
                 for (var index = 0; index < $scope.timeframes.length; index++) {
                     if ($scope.timeframes[index].filter === timeframe) {
@@ -28,6 +27,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
 
         resetLimit();
 
+        $scope.dialogs = Dialogs;
         $scope.currentUser = null;
         $scope.playofList = [];
         $scope.timeframes = [

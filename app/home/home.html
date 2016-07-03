@@ -3,7 +3,7 @@
     <div class="wnh-home-header-subtitle">Vote for the best play of the game</div>
 </div>
 
-<md-toolbar ng-controller="ToolbarCtrl" class="md-primary" ng-cloak>
+<md-toolbar class="md-primary" ng-cloak>
     <div class="md-toolbar-tools">
         <md-menu>
             <md-button aria-label="Open timeframe filter menu" ng-click="openMenu($mdOpenMenu, $event)">
@@ -55,7 +55,7 @@
 
         <span flex></span>
 
-        <md-button class="md-raised md-warn" ng-click="showPostDialog()">
+        <md-button class="md-raised md-warn" ng-click="dialogs.showPostDialog()">
             Post
         </md-button>
 

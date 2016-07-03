@@ -3,7 +3,7 @@
 angular.module('wnh.components', ['wnh.services'])
     .component('wnhPost', {
         templateUrl: 'post.html',
-        controller: function ($rootScope, $scope, Database, Auth, YoutubePlayers) {
+        controller: function ($rootScope, $scope, Database, Auth, Dialogs, YoutubePlayers) {
             var checkVote = function () {
                 Database.hasVote($scope.playof.key).then(function (userVote) {
                     if (userVote.val()) {
@@ -31,7 +31,7 @@ angular.module('wnh.components', ['wnh.services'])
                         //TODO handle failures / retry
                     });
                 } else {
-                    //TODO open login dialog
+                    Dialogs.showLoginDialog();
                 }
             };
 
