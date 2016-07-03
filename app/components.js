@@ -3,7 +3,7 @@
 angular.module('wnh.components', ['wnh.services'])
     .component('wnhPost', {
         templateUrl: 'post.html',
-        controller: function ($rootScope, $scope, Database, Auth) {
+        controller: function ($rootScope, $scope, Database, Auth, YoutubePlayers) {
             $scope.playof = this.playof;
             $scope.voteIsHover = false;
             $scope.hasVote = false;
@@ -41,7 +41,11 @@ angular.module('wnh.components', ['wnh.services'])
             };
 
             $scope.$on('youtube.player.ready', function ($event, player) {
-                //$scope.ytplayer.playVideo();
+                YoutubePlayers.registerPlayer(player);
+            });
+
+            $scope.$on('youtube.player.playing', function ($event, player) {
+                YoutubePlayers.pauseAllPlayers(player);
             });
         },
         bindings: {

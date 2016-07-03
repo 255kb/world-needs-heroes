@@ -32,6 +32,23 @@ angular.module('wnh.services', [])
         };
     }])
 
+    .factory('YoutubePlayers', [function () {
+        var youtubePlayersArray = [];
+
+        return {
+            registerPlayer: function (playerInstance) {
+                youtubePlayersArray.push(playerInstance);
+            },
+            pauseAllPlayers: function (currentPlayerInstance) {
+                youtubePlayersArray.forEach(function (player) {
+                    if (player.id !== currentPlayerInstance.id && player.getPlayerState() === 1) {
+                        player.pauseVideo();
+                    }
+                });
+            }
+        };
+    }])
+
     .factory('Youtube', ['$http', function ($http) {
         var youtubeApiKey = 'AIzaSyAyY4cymf3FIT7lOGltKv1WthHZlR7npkI',
             youtubeApiUrl = 'https://www.googleapis.com/youtube/v3/';
