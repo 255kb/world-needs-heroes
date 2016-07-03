@@ -11,7 +11,7 @@ angular.module('wnh', [
     'wnh.controllers',
     'wnh.components',
     'wnh.filters'
-]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', function ($locationProvider, $routeProvider, $mdThemingProvider) {
+]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$compileProvider', function ($locationProvider, $routeProvider, $mdThemingProvider, $compileProvider) {
     var defaultHues = {
         'default': '400',
         'hue-1': '50',
@@ -90,4 +90,6 @@ angular.module('wnh', [
     $locationProvider.html5Mode(true);
 
     $routeProvider.otherwise({redirectTo: '/'});
+
+    $compileProvider.debugInfoEnabled(false);
 }]);
