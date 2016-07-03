@@ -15,6 +15,7 @@
   "scripts": {
     "prestart": "npm install",
     "start": "http-server -a localhost -p 8000 -c-1 ./app/dist",
-    "gulp watch": "gulp watch"
+    "gulp watch": "gulp watch",
+    "firebase deploy": "firebase deploy"
   }
 }
