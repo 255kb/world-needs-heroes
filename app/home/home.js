@@ -30,15 +30,15 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
 
         $scope.playofList = [];
         $scope.timeframes = [
-            {filter: 'week', title: 'Last week'},
-            {filter: 'day', title: 'Today'},
+            {filter: 'week', title: 'Last 7 days'},
+            {filter: 'day', title: 'Last day'},
             {filter: 'all', title: 'Overall'}
         ];
 
         $scope.heroes = Utils.heroesList;
         $scope.currentTimeframe = 'week';
         $scope.currentHero = '';
-        $scope.currentTimeframeName = 'Last week';
+        $scope.currentTimeframeName = 'Last 7 days';
 
         $scope.openMenu = function ($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
