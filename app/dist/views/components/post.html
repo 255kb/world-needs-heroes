@@ -5,7 +5,7 @@
 
   <div class="wnh-post__content">
     <md-card-actions layout="row" layout-align="start center">
-      <md-button ng-class="{'vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}"
+      <md-button ng-class="{'wnh-post__vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}"
                  ng-mouseover="voteHover(true)" ng-mouseleave="voteHover(false)" class="md-accent"
                  ng-click="vote()"
                  aria-label="Vote">
@@ -18,7 +18,7 @@
       </md-button>
       <span flex></span>
 
-      <div class="hero-tag hero-color-{{playof.hero}}"><span class="ohi-{{playof.hero}} hero-icon"></span>
+      <div class="wnh-post__hero-tag wnh-post__hero-tag--color-{{playof.hero}}"><span class="ohi-{{playof.hero}} wnh-post__hero-icon"></span>
         {{playof.hero | heroName}}
       </div>
     </md-card-actions>
