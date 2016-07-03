@@ -92,4 +92,13 @@ angular.module('wnh', [
     $routeProvider.otherwise({redirectTo: '/'});
 
     $compileProvider.debugInfoEnabled(false);
+
+    // Initialize the Firebase SDK
+    var config = {
+        apiKey: 'AIzaSyA9mff-Z4l_jkT4rJrvwf2YyozlBxU6gRk',
+        authDomain: 'world-needs-heroes.firebaseapp.com',
+        databaseURL: 'https://world-needs-heroes.firebaseio.com',
+        storageBucket: 'world-needs-heroes.appspot.com'
+    };
+    firebase.initializeApp(config);
 }]);
