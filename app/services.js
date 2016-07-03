@@ -1,26 +1,6 @@
 'use strict';
 
 angular.module('wnh.services', [])
-
-    .factory('Auth', ['$firebaseAuth', function ($firebaseAuth) {
-        var firebaseAuthInstance = $firebaseAuth(),
-            firebaseUser = null;
-
-        firebaseAuthInstance.$onAuthStateChanged(function (user) {
-            firebaseUser = user;
-        });
-
-        return {
-            getUser: function () {
-                return firebaseUser;
-            },
-            providerLogin: function (providerName) {
-                var provider = new firebase.auth[providerName + 'AuthProvider']();
-                return firebaseAuthInstance.$signInWithPopup(provider);
-            }
-        };
-    }])
-
     .factory('Utils', [function () {
         return {
             heroesList: {
