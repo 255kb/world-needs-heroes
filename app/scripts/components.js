@@ -2,7 +2,7 @@
 
 angular.module('wnh.components', ['wnh.services'])
     .component('wnhPost', {
-        templateUrl: 'post.html',
+        templateUrl: '../../views/components/post.html',
         controller: function ($rootScope, $scope, Database, Auth, Dialogs, YoutubePlayers) {
             var checkVote = function () {
                 Database.hasVote($scope.playof.key).then(function (userVote) {

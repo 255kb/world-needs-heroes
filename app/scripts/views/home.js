@@ -3,7 +3,7 @@
 angular.module('wnh.home', ['ngRoute', 'wnh.services'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'home/home.html',
+            templateUrl: '../../views/home.html',
             controller: 'HomeCtrl'
         });
     }])
