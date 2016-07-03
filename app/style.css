@@ -127,6 +127,12 @@ body {
     font-weight: normal;
 }
 
+.footer__link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #4298d2;
+}
+
 .md-button {
     font-weight: bold;
 }
