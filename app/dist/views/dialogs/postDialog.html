@@ -1,0 +1,49 @@
+<md-dialog flex="60" ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <p class="md-body-2">Add a video</p>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="hide()">
+        <md-icon>close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <form name="newPostForm">
+        <md-input-container class="md-block">
+          <label>Youtube video link or ID</label>
+          <input required name="videoLink" ng-model="newPost.videoLink" ng-change="videoLinkChange()">
+          <div ng-messages="newPostForm.videoLink.$error">
+            <div ng-message="required">The video ID is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Hero</label>
+          <md-select required name="hero" ng-model="newPost.hero">
+            <md-option ng-repeat="hero in heroesList" value="{{hero.id}}">
+              <md-icon ng-if="hero.id === 'multi'">grade</md-icon>
+              <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big"
+                       ng-if="hero.id !== 'multi'"></md-icon>
+              {{hero.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="newPostForm.hero.$error">
+            <div ng-message="required">Please choose a hero.</div>
+          </div>
+          <div class="hint">Select "Multiple heroes" if more than one are displayed in the video</div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Description (optional)</label>
+          <input name="description" ng-model="newPost.description">
+        </md-input-container>
+        <div ng-if="invalidId" class="validation-msg">This Youtube video ID is invalid.</div>
+      </form>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="post()" class="md-accent">
+      Post
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

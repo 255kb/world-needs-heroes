@@ -5,11 +5,16 @@
   "description": "A starter project for AngularJS",
   "license": "MIT",
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.5.4",
     "http-server": "^0.9.0",
     "shelljs": "^0.6.0"
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 -c-1 ./app"
+    "start": "http-server -a localhost -p 8000 -c-1 ./app/dist",
+    "gulp watch": "gulp watch"
   }
 }
