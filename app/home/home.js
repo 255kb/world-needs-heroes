@@ -9,7 +9,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         });
     }])
 
-    .controller('HomeCtrl', ['$scope', 'Auth', 'Database', 'Utils', function ($scope, Auth, Database, Utils) {
+    .controller('HomeCtrl', ['$rootScope', '$scope', 'Auth', 'Database', 'Utils', function ($rootScope, $scope, Auth, Database, Utils) {
         var getTimeframeName = function (timeframe) {
                 for (var index = 0; index < $scope.timeframes.length; index++) {
                     if ($scope.timeframes[index].filter === timeframe) {
@@ -28,6 +28,7 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
 
         resetLimit();
 
+        $scope.currentUser = null;
         $scope.playofList = [];
         $scope.timeframes = [
             {filter: 'week', title: 'Last 7 days'},
@@ -39,6 +40,10 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
         $scope.currentTimeframe = 'week';
         $scope.currentHero = '';
         $scope.currentTimeframeName = 'Last 7 days';
+
+        $scope.logout = function () {
+            Auth.logout();
+        };
 
         $scope.openMenu = function ($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
@@ -68,5 +73,9 @@ angular.module('wnh.home', ['ngRoute', 'wnh.services'])
                     $scope.playofList.push(postObject);
                 });
             });
+        });
+
+        $rootScope.$on('authChanged', function (event, user) {
+            $scope.currentUser = user;
         });
     }]);

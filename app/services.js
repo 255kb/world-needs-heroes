@@ -63,15 +63,19 @@ angular.module('wnh.services', [])
         };
     }])
 
-    .factory('Auth', ['$firebaseAuth', function ($firebaseAuth) {
+    .factory('Auth', ['$rootScope', '$firebaseAuth', function ($rootScope, $firebaseAuth) {
         var firebaseAuthInstance = $firebaseAuth(),
             firebaseUser = null;
 
         firebaseAuthInstance.$onAuthStateChanged(function (user) {
             firebaseUser = user;
+            $rootScope.$broadcast('authChanged', user);
         });
 
         return {
+            logout: function () {
+                return firebaseAuthInstance.$signOut();
+            },
             getUser: function () {
                 return firebaseUser;
             },

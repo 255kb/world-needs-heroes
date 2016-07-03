@@ -34,8 +34,8 @@
             <md-card-header-text>
                 <span class="md-title wnh-post__author">
                     Posted by
-                    <span ng-if="currentUserId !== playof.userId">{{author.name}}</span>
-                    <span ng-if="currentUserId === playof.userId">you</span>
+                    <span ng-if="currentUser.uid !== playof.userId">{{author.name}}</span>
+                    <span ng-if="currentUser.uid === playof.userId">you</span>
                 </span>
                 <span class="md-subhead">
                     <span ng-if="author.battletag" class="wnh-post__author-tag">
