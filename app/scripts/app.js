@@ -7,7 +7,7 @@ angular.module('wnh', [
     'ngMaterial',
     'ngMessages',
     'ngRoute',
-    'wnh.home',
+    'wnh.main',
     'wnh.components',
     'wnh.filters'
 ]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$compileProvider', function ($locationProvider, $routeProvider, $mdThemingProvider, $compileProvider) {

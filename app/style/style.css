@@ -159,19 +159,19 @@ md-card md-card-header:last-child md-card-avatar {
     text-align: center;
 }
 
-.wnh-home-header {
+.wnh-header {
     font-family: "Big Noodle Too", impact, sans-serif;
     /*height: 120px;*/
     background-color: #324363;
 }
 
-.wnh-home-header-title {
+.wnh-header-title {
     color: #f89b30;
     padding: 25px 0 0 50px;
     font-size: 3rem;
 }
 
-.wnh-home-header-subtitle {
+.wnh-header-subtitle {
     color: #4298d2;
     padding: 0 0 0 75px;
     font-size: 1.2rem;

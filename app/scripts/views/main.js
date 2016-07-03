@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('wnh.home', ['ngRoute', 'wnh.services'])
+angular.module('wnh.main', ['ngRoute', 'wnh.services'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: '../../views/home.html',
-            controller: 'HomeCtrl'
+            templateUrl: '../../views/main.html',
+            controller: 'MainCtrl'
         });
     }])
 
-    .controller('HomeCtrl', ['$rootScope', '$scope', 'Auth', 'Database', 'Utils', 'Dialogs', function ($rootScope, $scope, Auth, Database, Utils, Dialogs) {
+    .controller('MainCtrl', ['$rootScope', '$scope', 'Auth', 'Database', 'Utils', 'Dialogs', function ($rootScope, $scope, Auth, Database, Utils, Dialogs) {
         var getTimeframeName = function (timeframe) {
                 for (var index = 0; index < $scope.timeframes.length; index++) {
                     if ($scope.timeframes[index].filter === timeframe) {
