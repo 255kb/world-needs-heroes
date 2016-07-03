@@ -79,7 +79,12 @@ angular.module('wnh.services', [])
       },
       providerLogin: function (providerName) {
         var provider = new firebase.auth[providerName + 'AuthProvider']();
-        return firebaseAuthInstance.$signInWithPopup(provider);
+
+        if (providerName === 'Facebook') {
+          return firebaseAuthInstance.$signInWithRedirect(provider);
+        } else {
+          return firebaseAuthInstance.$signInWithPopup(provider);
+        }
       }
     };
   }])
