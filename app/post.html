@@ -6,7 +6,8 @@
     <div class="wnh-post__content">
         <md-card-actions layout="row" layout-align="start center">
             <md-button ng-class="{'vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}"
-                       ng-mouseover="voteHover(true)" ng-mouseleave="voteHover(false)" class="md-accent" ng-click="vote()"
+                       ng-mouseover="voteHover(true)" ng-mouseleave="voteHover(false)" class="md-accent"
+                       ng-click="vote()"
                        aria-label="Vote">
                 <md-tooltip md-direction="bottom">
                     Vote for this play of the game
@@ -22,8 +23,8 @@
             </div>
         </md-card-actions>
 
-        <md-card-content>
-            <p ng-if="playof.description">{{playof.description}}</p>
+        <md-card-content ng-if="playof.description">
+            {{playof.description}}
         </md-card-content>
 
         <md-card-header ng-if="author && author.name">
