@@ -177,7 +177,6 @@ md-card md-card-header:last-child md-card-avatar {
 }
 
 .wnh-post__content {
-  position: relative;
 }
 
 .wnh-post__author {
@@ -189,9 +188,13 @@ md-card md-card-header:last-child md-card-avatar {
 }
 
 .wnh-post__vote-btn {
-  position: absolute;
-  left: -22px;
-  top: -14px;
+}
+
+.wnh-post__vote-count {
+  font-weight: normal;
+  font-style: #666;
+  margin-left: 15px;
+  color: #4298d2;
 }
 
 .wnh-post__hero-tag {

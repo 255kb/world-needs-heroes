@@ -5,17 +5,17 @@
 
   <div class="wnh-post__content">
     <md-card-actions layout="row" layout-align="start center">
-      <md-button ng-class="{'wnh-post__vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}"
-                 class="md-accent"
+      <md-button ng-class="{'md-hue-1': !hasVote}"
+                 class="md-fab md-mini md-accent wnh-post__vote-btn"
                  ng-click="vote()"
                  aria-label="Vote">
         <md-tooltip md-direction="bottom">
           Vote for this play of the game
         </md-tooltip>
         <md-icon>plus_one</md-icon>
-        <span>{{playof.votesCount}}</span>
       </md-button>
-      
+      <div class="wnh-post__vote-count">{{playof.votesCount}}</div>
+
       <span flex></span>
 
       <div class="wnh-post__hero-tag wnh-post__hero-tag--color-{{playof.hero}}"><span class="ohi-{{playof.hero}} wnh-post__hero-icon"></span>
