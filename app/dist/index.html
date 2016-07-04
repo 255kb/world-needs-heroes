@@ -21,12 +21,105 @@
   <base href="/">
 </head>
 <body ng-app="wnh" ng-cloak>
-<div ng-view></div>
+
+<a class="wnh-header" href="/">
+  <div class="wnh-header-title">World Needs Heroes</div>
+  <div class="wnh-header-subtitle">Vote for Overwatch&trade; best plays of the game</div>
+</a>
+
+<md-toolbar class="md-primary" ng-controller="ToolbarCtrl" ng-cloak>
+  <div class="md-toolbar-tools">
+    <md-menu>
+      <md-button aria-label="Open timeframe filter menu" ng-click="openMenu($mdOpenMenu, $event)">
+        <md-icon md-menu-origin>access_time</md-icon>
+        {{getTimeframeName(currentTimeframe)}}
+        <md-tooltip md-direction="bottom">
+          Filter by time
+        </md-tooltip>
+      </md-button>
+      <md-menu-content width="3">
+        <md-menu-item ng-repeat="timeframe in timeframes">
+          <md-button ng-click="dataFilters.setTimeframe(timeframe.filter)"
+                     ng-class="{'md-accent': timeframe.filter === currentTimeframe}">
+            <md-icon ng-if="timeframe.filter === currentTimeframe">check</md-icon>
+            {{timeframe.title}}
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+    <md-menu>
+      <md-button aria-label="Open hero filter menu" ng-click="openMenu($mdOpenMenu, $event)">
+        <span ng-if="currentHero === ''"><md-icon md-menu-origin>done</md-icon>All heroes</span>
+        <md-icon md-menu-origin ng-if="currentHero === 'multi'">grade</md-icon>
+        <md-icon class="ohi-{{currentHero}} hero-icon"
+                 ng-if="currentHero !== 'multi'"></md-icon>
+        {{currentHero | heroName}}
+        <md-tooltip md-direction="bottom">
+          Filter by hero
+        </md-tooltip>
+      </md-button>
+      <md-menu-content width="3">
+        <md-menu-item>
+          <md-button ng-click="dataFilters.setHero('')" ng-class="{'md-accent': currentHero === ''}">
+            <md-icon md-menu-origin>done</md-icon>
+            All heroes
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-repeat="hero in heroes">
+          <md-button ng-click="dataFilters.setHero(hero.id)"
+                     ng-class="{'md-accent': hero.id === currentHero}">
+            <md-icon md-menu-origin ng-if="hero.id === 'multi'">grade</md-icon>
+            <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big" ng-if="hero.id !== 'multi'"></md-icon>
+            {{hero.filterName || hero.name}}
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+    <span flex></span>
+
+    <md-button class="md-raised md-warn" ng-click="dialogs.showPostDialog()">
+      Post
+    </md-button>
+
+    <md-menu ng-if="currentUser">
+      <md-button class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)" aria-label="Open user menu">
+        <img ng-src="{{currentUser.photoURL}}" class="toolbar-avatar">
+      </md-button>
+
+      <md-menu-content width="2">
+        <md-menu-item>
+          <md-button ng-click="auth.logout()">
+            <md-icon>exit_to_app</md-icon>
+            Log out
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>
+
+<md-content class="md-padding" layout="row" layout-align="center center" ng-cloak>
+  <div layout="column" flex-xs="100" flex-gt-xs="75" flex-gt-md="50">
+
+    <div ng-view></div>
+
+    <div class="footer">
+      <p>Made with a
+        <md-icon>keyboard</md-icon> (and <md-icon>favorite</md-icon>)
+        by <a href="https://twitter.com/255kb" target="_blank" class="footer__link">255kb</a>.
+      </p>
+      <p>Overwatch&trade; and Blizzard Entertainment&reg; are trademarks or registered trademarks of Blizzard
+        Entertainment, Inc., in the U.S. and/or other countries.</p>
+    </div>
+  </div>
+</md-content>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>

@@ -1,0 +1,9 @@
+<div ng-if="!playof && inProgress" class="progress-container">
+  <md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>
+</div>
+<div ng-if="playof && !inProgress">
+  <wnh-post playof="playof"></wnh-post>
+</div>
+<div ng-if="!playof && ! inProgress" class="show-more">
+  <md-subheader class="md-accent">This play of the game does not exists</md-subheader>
+</div>

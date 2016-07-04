@@ -7,9 +7,11 @@ angular.module('wnh', [
   'ngMaterial',
   'ngMessages',
   'ngRoute',
-  'wnh.main',
+  'wnh.filters',
+  'wnh.controllers',
   'wnh.components',
-  'wnh.filters'
+  'wnh.main',
+  'wnh.post'
 ]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', '$compileProvider', function ($locationProvider, $routeProvider, $mdThemingProvider, $compileProvider) {
   var defaultHues = {
     'default': '400',

@@ -38,11 +38,11 @@
           <span ng-if="currentUser.uid === playof.userId">you</span>
         </span>
         <span class="md-subhead">
-          <span ng-if="author.battletag" class="wnh-post__author-tag">
+          <span ng-if="author.battletag" class="wnh-post__author-tag" ng-click="gotoBattlenetProfile()">
             <md-tooltip md-direction="bottom">
-              BattleTag
+              View official profile
             </md-tooltip>
-            {{author.battletag}}
+            <span>{{author.battletag}}</span>
           </span>
         </span>
       </md-card-header-text>

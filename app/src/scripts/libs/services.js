@@ -1,5 +1,5 @@
 angular.module('wnh.services', [])
-  .factory('Utils', [function () {
+  .factory('Utils', ['$mdToast', function ($mdToast) {
     return {
       heroesList: {
         'multi': {id: 'multi', name: 'Multiple heroes'},
@@ -25,8 +25,41 @@ angular.module('wnh.services', [])
         'symmetra': {id: 'symmetra', name: 'Symmetra'},
         'zenyatta': {id: 'zenyatta', name: 'Zenyatta'}
       },
+      timeframesList: [
+        {filter: 'week', title: 'Last 7 days'},
+        {filter: 'day', title: 'Last day'},
+        {filter: 'all', title: 'Overall'}
+      ],
       itemsPerPage: 5,
-      overallLimit: 300
+      overallLimit: 300,
+      showToast: function (message) {
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent(message)
+            .hideDelay(4000)
+        );
+      }
+    };
+  }])
+
+  .factory('DataFilters', ['$rootScope', function ($rootScope) {
+    var currentTimeframe = 'week', currentHero = '';
+
+    return {
+      getTimeframe: function () {
+        return currentTimeframe;
+      },
+      getHero: function () {
+        return currentHero;
+      },
+      setTimeframe: function (timeframe) {
+        currentTimeframe = timeframe;
+        $rootScope.$broadcast('dataFiltersTimeframeChanged', timeframe);
+      },
+      setHero: function (hero) {
+        currentHero = hero;
+        $rootScope.$broadcast('dataFiltersHeroChanged', hero);
+      }
     };
   }])
 
@@ -160,7 +193,7 @@ angular.module('wnh.services', [])
       showPostDialog: function (event) {
         if (Auth.getUser()) {
           $mdDialog.show({
-            controller: ['$scope', '$mdDialog', 'Utils', 'Youtube', '$mdToast', 'Database', function ($scope, $mdDialog, Utils, Youtube, $mdToast, Database) {
+            controller: ['$scope', '$mdDialog', '$location', 'Utils', 'Youtube', 'Database', function ($scope, $mdDialog, $location, Utils, Youtube, Database) {
               $scope.heroesList = Utils.heroesList;
               $scope.invalidId = false;
               $scope.newPost = {
@@ -189,20 +222,22 @@ angular.module('wnh.services', [])
                         if ($scope.newPost.description) {
                           data.description = $scope.newPost.description;
                         }
-                        Database.newPost(data);
 
-                        //TODO redirect to single item page
+                        var newPost = Database.newPost(data);
+
+                        if (newPost) {
+                          $location.path('/post/' + newPost);
+                          Utils.showToast('Your play of the game has been posted');
+                        } else {
+                          Utils.showToast('Error, please try again later');
+                        }
 
                         $mdDialog.hide();
                       } else {
                         $scope.invalidId = true;
                       }
                     }, function errorCallback(error) {
-                      $mdToast.show(
-                        $mdToast.simple()
-                          .textContent('Error, please try again later')
-                          .hideDelay(3000)
-                      );
+                      Utils.showToast('Error, please try again later');
                     });
                   } else {
                     $scope.invalidId = true;
@@ -254,6 +289,8 @@ angular.module('wnh.services', [])
             //add to profile posts
             firebaseDatabaseInstance.ref('profile/' + Auth.getUser().uid + '/posts/' + newPost.key).set(true);
           });
+
+          return newPost.key;
         }
       },
       vote: function (postId, alreadyVoted) {
@@ -279,7 +316,7 @@ angular.module('wnh.services', [])
           return firebaseDatabaseInstance.ref('votes/' + postId + '/' + Auth.getUser().uid).once('value');
         }
       },
-      getPlayof: function (timeframe) {
+      getPlayofList: function (timeframe) {
         var postsRef = firebaseDatabaseInstance.ref('posts'),
         //start in past, end now (timestamp order is inverted)
           startTime = 0, endTime = moment().valueOf();
@@ -293,6 +330,9 @@ angular.module('wnh.services', [])
         }
 
         return postsRef.orderByChild('postedAt').startAt(startTime).endAt(endTime);
+      },
+      getPlayof: function (playofId) {
+        return firebaseDatabaseInstance.ref('posts/' + playofId).once('value');
       }
     };
   }]);

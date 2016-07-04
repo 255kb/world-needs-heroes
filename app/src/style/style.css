@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 @font-face {
   font-family: 'Big Noodle Too';
   src: url('../fonts/big-noodle.ttf') format('truetype');
@@ -160,9 +164,11 @@ md-card md-card-header:last-child md-card-avatar {
   text-align: center;
 }
 
-.wnh-header {
+.wnh-header, .wnh-header:visited, .wnh-header:hover, .wnh-header:active {
   font-family: "Big Noodle Too", impact, sans-serif;
   background-color: #324363;
+  display: block;
+  text-decoration: none;
 }
 
 .wnh-header-title {
@@ -196,9 +202,9 @@ md-card md-card-header:last-child md-card-avatar {
 
 .wnh-post__vote-count {
   font-weight: normal;
-  font-style: #666;
-  margin-left: 15px;
-  color: #4298d2;
+  font-style: italic;
+  margin-left: 10px;
+  color: #666;
 }
 
 .wnh-post__hero-tag {

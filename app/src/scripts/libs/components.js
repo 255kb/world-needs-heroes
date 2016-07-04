@@ -1,7 +1,7 @@
 angular.module('wnh.components', ['wnh.services'])
   .component('wnhPost', {
     templateUrl: 'views/components/post.html',
-    controller: ['$rootScope', '$scope', 'Database', 'Auth', 'Dialogs', 'YoutubePlayers', function ($rootScope, $scope, Database, Auth, Dialogs, YoutubePlayers) {
+    controller: ['$rootScope', '$scope', '$window', 'Database', 'Auth', 'Dialogs', 'YoutubePlayers', function ($rootScope, $scope, $window, Database, Auth, Dialogs, YoutubePlayers) {
       var checkVote = function () {
         Database.hasVote($scope.playof.key).then(function (userVote) {
           if (userVote.val()) {
@@ -27,6 +27,10 @@ angular.module('wnh.components', ['wnh.services'])
         } else {
           Dialogs.showLoginDialog();
         }
+      };
+
+      $scope.gotoBattlenetProfile = function () {
+        $window.location.href = 'https://playoverwatch.com/en-us/search?q=' + $scope.author.battletag.replace('#', '-');
       };
 
       //on init fetch post author profile
