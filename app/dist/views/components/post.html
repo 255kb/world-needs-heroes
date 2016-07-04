@@ -6,16 +6,16 @@
   <div class="wnh-post__content">
     <md-card-actions layout="row" layout-align="start center">
       <md-button ng-class="{'wnh-post__vote-btn': true, 'md-fab': true, 'md-hue-3': !hasVote}"
-                 ng-mouseover="voteHover(true)" ng-mouseleave="voteHover(false)" class="md-accent"
+                 class="md-accent"
                  ng-click="vote()"
                  aria-label="Vote">
         <md-tooltip md-direction="bottom">
           Vote for this play of the game
         </md-tooltip>
-        <md-icon ng-if="voteIsHover && !hasVote">add</md-icon>
-        <md-icon ng-if="voteIsHover && hasVote">remove</md-icon>
-        <span ng-if="!voteIsHover">{{playof.votesCount}}</span>
+        <md-icon>plus_one</md-icon>
+        <span>{{playof.votesCount}}</span>
       </md-button>
+      
       <span flex></span>
 
       <div class="wnh-post__hero-tag wnh-post__hero-tag--color-{{playof.hero}}"><span class="ohi-{{playof.hero}} wnh-post__hero-icon"></span>
