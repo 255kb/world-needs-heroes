@@ -16,10 +16,6 @@ angular.module('wnh.components', ['wnh.services'])
       $scope.author = null;
       $scope.currentUser = Auth.getUser();
 
-      $scope.voteHover = function (isHover) {
-        $scope.voteIsHover = isHover;
-      };
-
       $scope.vote = function () {
         if (Auth.getUser()) {
           Database.vote($scope.playof.key, $scope.hasVote).then(function () {
