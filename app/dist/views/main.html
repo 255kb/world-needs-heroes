@@ -28,7 +28,7 @@
       <md-button aria-label="Open hero filter menu" ng-click="openMenu($mdOpenMenu, $event)">
         <span ng-if="currentHero === ''"><md-icon md-menu-origin>done</md-icon>All heroes</span>
         <md-icon md-menu-origin ng-if="currentHero === 'multi'">grade</md-icon>
-        <md-icon class="ohi-{{currentHero}} hero-icon hero-icon--big hero-icon--margin-right"
+        <md-icon class="ohi-{{currentHero}} hero-icon"
                  ng-if="currentHero !== 'multi'"></md-icon>
         {{currentHero | heroName}}
         <md-tooltip md-direction="bottom">

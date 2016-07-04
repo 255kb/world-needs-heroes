@@ -149,6 +149,10 @@ md-card md-card-header:last-child md-card-avatar {
   margin-left: 0;
 }
 
+.hero-icon {
+  font-size: 24px;
+}
+
 .validation-msg {
   color: #c56d07;
   font-size: 0.8rem;
