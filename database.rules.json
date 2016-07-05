@@ -30,20 +30,6 @@
         }
       }
     },
-    "comments": {
-      ".read": true,
-      "$postId": {
-        // Check that the post exists
-        ".validate": "root.child('posts').child($postId).exists()",
-        "$commentId": {
-          // Can only create or delete comments if you are the author
-          ".write": "(auth.uid === newData.child('author').child('uid').val() && !data.exists()) || (auth.uid === data.child('author').child('uid').val() && !newData.exists())",
-          "$other": {
-            ".validate": false
-          }
-        }
-      }
-    },
     "votes": {
       ".read": true,
       "$postId": {
