@@ -20,7 +20,13 @@ angular.module('wnh.components', ['wnh.services'])
         if (Auth.getUser()) {
           Database.vote($scope.playof.key, $scope.hasVote).then(function () {
             $scope.hasVote = !$scope.hasVote;
-            ($scope.hasVote) ? $scope.playof.votesCount++ : $scope.playof.votesCount--;
+            if ($scope.hasVote) {
+              $scope.playof.votesCount++;
+              ga('send', 'event', 'playof', 'add_vote');
+            } else {
+              $scope.playof.votesCount--;
+              ga('send', 'event', 'playof', 'remove_vote');
+            }
           }).catch(function (error) {
             //TODO handle failures / retry
           });
