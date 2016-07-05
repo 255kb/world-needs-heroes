@@ -2,10 +2,10 @@
   "rules": {
     "posts": {
       ".read": true,
+      //post author has right to create, anyone can update (except validation below)
+      ".write": "(auth.uid === newData.child('userId').val() && !data.exists()) || (auth !== null && data.exists())",
       ".indexOn": ["postedAt", "votesCount"],
       "$postId": {
-        //post author has right to create, anyone can update (except validation below)
-        ".write": "(auth.uid === newData.child('userId').val() && !data.exists()) || (auth !== null && data.exists())",
         "votesCount": {
           //need a number, equal to existing data +/- 1, only if adding or removing votes items
           ".validate": "(!data.exists() && newData.val() === 0) || (data.exists() && ( (newData.val() === data.val() + 1 && newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && !data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists())  || (newData.val() === data.val() - 1 && !newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists()) ))"
