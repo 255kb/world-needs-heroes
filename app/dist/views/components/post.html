@@ -32,19 +32,19 @@
         <img class="md-user-avatar" ng-src="{{author.picture}}">
       </md-card-avatar>
       <md-card-header-text>
-        <span class="md-title wnh-post__author">
+        <div class="md-title wnh-post__author">
           Posted by
           <span ng-if="currentUser.uid !== playof.userId">{{author.name}}</span>
           <span ng-if="currentUser.uid === playof.userId">you</span>
-        </span>
-        <span class="md-subhead">
-          <span ng-if="author.battletag" class="wnh-post__author-tag" ng-click="gotoBattlenetProfile()">
+        </div>
+        <div class="md-subhead">
+          <a ng-if="author.battletag" ng-href="https://playoverwatch.com/en-us/search?q={{author.battletag.replace('#', '-')}}" class="link" target="_blank">
             <md-tooltip md-direction="bottom">
               View official profile
             </md-tooltip>
             <span>{{author.battletag}}</span>
-          </span>
-        </span>
+          </a>
+        </div>
       </md-card-header-text>
     </md-card-header>
   </div>

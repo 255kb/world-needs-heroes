@@ -144,6 +144,11 @@ body {
   color: #4298d2;
 }
 
+.link {
+  text-decoration: none;
+  color: #4298d2;
+}
+
 .md-button {
   font-weight: bold;
 }
@@ -191,10 +196,6 @@ md-card md-card-header:last-child md-card-avatar {
 
 .wnh-post__author {
   font-weight: bold;
-}
-
-.wnh-post__author-tag {
-  color: #4298d2;
 }
 
 .wnh-post__vote-btn {

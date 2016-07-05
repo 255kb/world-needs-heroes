@@ -35,10 +35,6 @@ angular.module('wnh.components', ['wnh.services'])
         }
       };
 
-      $scope.gotoBattlenetProfile = function () {
-        $window.location.href = 'https://playoverwatch.com/en-us/search?q=' + $scope.author.battletag.replace('#', '-');
-      };
-
       //on init fetch post author profile
       this.$onInit = function () {
         if (Auth.getUser()) {
