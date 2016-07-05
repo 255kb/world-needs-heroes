@@ -13,10 +13,10 @@ angular.module('wnh.controllers', ['wnh.services'])
       $mdOpenMenu(ev);
     };
 
-    $scope.getTimeframeName = function (timeframe) {
+    $scope.getTimeframeInfo = function (timeframe, info) {
       for (var i = 0; i < $scope.timeframes.length; i++) {
         if (timeframe === $scope.timeframes[i].filter) {
-          return $scope.timeframes[i].title;
+          return $scope.timeframes[i][info];
         }
       }
     };
@@ -32,4 +32,8 @@ angular.module('wnh.controllers', ['wnh.services'])
     $rootScope.$on('dataFiltersHeroChanged', function (event, hero) {
       $scope.currentHero = hero;
     });
+  }])
+
+  .controller('PostBtnCtrl', ['$scope', 'Dialogs', function ($scope, Dialogs) {
+    $scope.dialogs = Dialogs;
   }]);

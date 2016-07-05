@@ -31,8 +31,8 @@
   <div class="md-toolbar-tools">
     <md-menu>
       <md-button aria-label="Open timeframe filter menu" ng-click="openMenu($mdOpenMenu, $event)">
-        <md-icon md-menu-origin>access_time</md-icon>
-        {{getTimeframeName(currentTimeframe)}}
+        <md-icon md-menu-origin>{{getTimeframeInfo(currentTimeframe, 'icon')}}</md-icon>
+        {{getTimeframeInfo(currentTimeframe, 'title')}}
         <md-tooltip md-direction="bottom">
           Filter by time
         </md-tooltip>
@@ -41,8 +41,8 @@
         <md-menu-item ng-repeat="timeframe in timeframes">
           <md-button ng-click="dataFilters.setTimeframe(timeframe.filter)"
                      ng-class="{'md-accent': timeframe.filter === currentTimeframe}">
-            <md-icon ng-if="timeframe.filter === currentTimeframe">check</md-icon>
-            <span class="hide-xs hide-sm" flex>{{timeframe.title}}</span>
+            <md-icon>{{timeframe.icon}}</md-icon>
+            {{timeframe.title}}
           </md-button>
         </md-menu-item>
       </md-menu-content>
@@ -76,7 +76,7 @@
 
     <span flex></span>
 
-    <md-button class="md-raised md-warn" ng-click="dialogs.showPostDialog()">
+    <md-button class="md-raised md-warn hide-xs" ng-click="dialogs.showPostDialog()">
       Post
     </md-button>
 
@@ -116,6 +116,9 @@
   </div>
 </md-content>
 
+<md-button class="md-fab md-fab-bottom-right md-warn hide-gt-xs" style="position: fixed;" ng-controller="PostBtnCtrl" ng-click="dialogs.showPostDialog()">
+  <md-icon>add_to_queue</md-icon>
+</md-button>
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>

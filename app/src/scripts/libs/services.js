@@ -25,9 +25,9 @@ angular.module('wnh.services', [])
         'zenyatta': {id: 'zenyatta', name: 'Zenyatta'}
       },
       timeframesList: [
-        {filter: 'week', title: '7 days'},
-        {filter: 'day', title: 'Last day'},
-        {filter: 'all', title: 'Overall'}
+        {filter: 'week', title: '7 days', icon: 'view_week'},
+        {filter: 'day', title: 'Last day', icon: 'view_day'},
+        {filter: 'all', title: 'Overall', icon: 'history'}
       ],
       itemsPerPage: 5,
       overallLimit: 300,
