@@ -135,6 +135,7 @@ angular.module('wnh.services', [])
 
             $scope.login = function (providerName) {
               Auth.providerLogin(providerName).then(function (result) {
+                ga('send', 'event', 'user', 'register');
                 $mdDialog.hide();
                 Database.getProfile(result.user.uid).then(function (userProfile) {
                   var profile = userProfile.val();
@@ -175,7 +176,10 @@ angular.module('wnh.services', [])
                 battletag: $scope.onboarding.battleTag,
                 picture: Auth.getUser().photoURL,
                 onboarding: true
+              }, function () {
+                ga('send', 'event', 'user', 'onboarding');
               });
+              
               $mdDialog.hide();
             };
           }],
@@ -226,6 +230,7 @@ angular.module('wnh.services', [])
                         var newPost = Database.newPost(data);
 
                         if (newPost) {
+                          ga('send', 'event', 'playof', 'post');
                           $location.path('/post/' + newPost);
                           Utils.showToast('Your play of the game has been posted');
                         } else {
@@ -273,9 +278,9 @@ angular.module('wnh.services', [])
       getProfile: function (userId) {
         return firebaseDatabaseInstance.ref('profile/' + userId).once('value');
       },
-      saveProfile: function (data) {
+      saveProfile: function (data, callback) {
         if (Auth.getUser()) {
-          firebaseDatabaseInstance.ref('profile/' + Auth.getUser().uid).update(data);
+          firebaseDatabaseInstance.ref('profile/' + Auth.getUser().uid).update(data, callback);
         }
       },
       newPost: function (data) {
