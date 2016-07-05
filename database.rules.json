@@ -6,6 +6,7 @@
       ".write": "(auth.uid === newData.child('userId').val() && !data.exists()) || (auth !== null && data.exists())",
       ".indexOn": ["postedAt", "votesCount"],
       "$postId": {
+        ".validate": "newData.hasChildren(['votesCount', 'postedAt', 'userId', 'hero', 'youtubeId'])",
         "votesCount": {
           //need a number, equal to existing data +/- 1, only if adding or removing votes items
           ".validate": "newData.exists() && (!data.exists() && newData.val() === 0) || (data.exists() && ( (newData.val() === data.val() + 1 && newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && !data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists())  || (newData.val() === data.val() - 1 && !newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists()) ))"
