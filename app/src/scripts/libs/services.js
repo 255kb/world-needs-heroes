@@ -121,9 +121,9 @@ angular.module('wnh.services', [])
     };
   }])
 
-  .factory('Dialogs', ['$mdDialog', 'Auth', function ($mdDialog, Auth) {
+  .factory('Dialogs', ['$mdDialog', '$q', 'Auth', 'Database', function ($mdDialog, $q, Auth, Database) {
     return {
-      showLoginDialog: function (event) {
+      showLoginDialog: function () {
         var dialogs = this;
 
         $mdDialog.show({
@@ -139,7 +139,7 @@ angular.module('wnh.services', [])
                 Database.getProfile(result.user.uid).then(function (userProfile) {
                   var profile = userProfile.val();
                   if (!profile || (profile && !profile.onboarding)) {
-                    dialogs.showOnboardingDialog();
+                    dialogs.showProfileDialog(true);
                   }
                 });
               }).catch(function (error) {
@@ -166,34 +166,58 @@ angular.module('wnh.services', [])
             //dialog cancelled
           });
       },
-      showOnboardingDialog: function (event) {
-        $mdDialog.show({
-          controller: ['$scope', '$mdDialog', 'Database', function ($scope, $mdDialog, Database) {
-            $scope.onboard = function () {
-              Database.saveProfile({
-                name: $scope.onboarding.displayName,
-                battletag: $scope.onboarding.battleTag,
-                picture: Auth.getUser().photoURL,
-                onboarding: true
-              }, function () {
-                ga('send', 'event', 'user', 'onboarding');
-              });
+      showProfileDialog: function (onboarding) {
+        var clickOutsideToClose = true,
+          promisesArray = [];
 
-              $mdDialog.hide();
-            };
-          }],
-          templateUrl: './views/dialogs/onboardingDialog.html',
-          parent: angular.element(document.body),
-          targetEvent: event,
-          clickOutsideToClose: false
-        })
-          .then(function (answer) {
-            //dialog validated
-          }, function () {
-            //dialog cancelled
-          });
+        if (onboarding) {
+          clickOutsideToClose = false;
+        } else {
+          promisesArray.push(Database.getProfile(Auth.getUser().uid));
+        }
+
+        $q.all(promisesArray).then(function (promisesResultsArray) {
+          $mdDialog.show({
+            controller: ['$scope', '$mdDialog', 'Database', function ($scope, $mdDialog, Database) {
+              if (promisesResultsArray.length) {
+                $scope.profile = {
+                  displayName: promisesResultsArray[0].val().name || '',
+                  battleTag: promisesResultsArray[0].val().battletag || ''
+                };
+              }
+
+              if (onboarding) {
+                $scope.title = 'Complete your profile';
+              } else {
+                $scope.title = 'Edit your profile';
+              }
+
+              $scope.save = function () {
+                Database.saveProfile({
+                  name: $scope.profile.displayName,
+                  battletag: $scope.profile.battleTag,
+                  picture: Auth.getUser().photoURL,
+                  onboarding: true
+                }, function () {
+                  ga('send', 'event', 'user', 'onboarding');
+                });
+
+                $mdDialog.hide();
+              };
+            }],
+            templateUrl: './views/dialogs/profileDialog.html',
+            parent: angular.element(document.body),
+            targetEvent: event,
+            clickOutsideToClose: clickOutsideToClose
+          })
+            .then(function (answer) {
+              //dialog validated
+            }, function () {
+              //dialog cancelled
+            });
+        });
       },
-      showPostDialog: function (event) {
+      showPostDialog: function () {
         if (Auth.getUser()) {
           $mdDialog.show({
             controller: ['$scope', '$mdDialog', '$location', 'Utils', 'Youtube', 'Database', function ($scope, $mdDialog, $location, Utils, Youtube, Database) {

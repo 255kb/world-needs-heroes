@@ -87,6 +87,12 @@
 
       <md-menu-content width="2">
         <md-menu-item>
+          <md-button ng-click="dialogs.showProfileDialog(false)">
+            <md-icon>person</md-icon>
+            Edit profile
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
           <md-button ng-click="auth.logout()">
             <md-icon>exit_to_app</md-icon>
             Log out
