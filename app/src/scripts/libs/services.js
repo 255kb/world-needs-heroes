@@ -179,7 +179,7 @@ angular.module('wnh.services', [])
               }, function () {
                 ga('send', 'event', 'user', 'onboarding');
               });
-              
+
               $mdDialog.hide();
             };
           }],

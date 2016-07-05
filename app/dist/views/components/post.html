@@ -18,7 +18,8 @@
 
       <span flex></span>
 
-      <div class="wnh-post__hero-tag wnh-post__hero-tag--color-{{playof.hero}}"><span class="ohi-{{playof.hero}} hero-icon"></span>
+      <div class="wnh-post__hero-tag wnh-post__hero-tag--color-{{playof.hero}}"><span
+        class="ohi-{{playof.hero}} hero-icon"></span>
         {{playof.hero | heroName}}
       </div>
     </md-card-actions>
@@ -38,7 +39,9 @@
           <span ng-if="currentUser.uid === playof.userId">you</span>
         </div>
         <div class="md-subhead">
-          <a ng-if="author.battletag" ng-href="https://playoverwatch.com/en-us/search?q={{author.battletag.replace('#', '-')}}" class="link" target="_blank">
+          <a ng-if="author.battletag"
+             ng-href="https://playoverwatch.com/en-us/search?q={{author.battletag.replace('#', '-')}}" class="link"
+             target="_blank">
             <md-tooltip md-direction="bottom">
               View official profile
             </md-tooltip>
