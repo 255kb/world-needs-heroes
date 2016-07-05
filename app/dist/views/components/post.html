@@ -22,6 +22,24 @@
         class="ohi-{{playof.hero}} hero-icon"></span>
         {{playof.hero | heroName}}
       </div>
+
+      <md-menu>
+        <md-button class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)" aria-label="Open share menu">
+          <md-icon>share</md-icon>
+        </md-button>
+
+        <md-menu-content width="2">
+          <md-menu-item ng-repeat="shareProvider in shareProviders">
+            <md-button socialshare
+                       socialshare-provider="{{shareProvider.id}}"
+                       socialshare-text="{{shareData.text}}"
+                       socialshare-hashtags="{{shareData.hashtags}}"
+                       socialshare-url="{{shareData.url}}">
+              {{shareProvider.name}}
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </md-card-actions>
 
     <md-card-content ng-if="playof.description">

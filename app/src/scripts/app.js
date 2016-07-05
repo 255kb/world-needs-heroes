@@ -4,6 +4,7 @@
 angular.module('wnh', [
   'firebase',
   'youtube-embed',
+  '720kb.socialshare',
   'ngMaterial',
   'ngMessages',
   'ngRoute',

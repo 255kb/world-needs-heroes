@@ -1,7 +1,7 @@
 angular.module('wnh.components', ['wnh.services'])
   .component('wnhPost', {
     templateUrl: 'views/components/post.html',
-    controller: ['$rootScope', '$scope', '$window', 'Database', 'Auth', 'Dialogs', 'YoutubePlayers', function ($rootScope, $scope, $window, Database, Auth, Dialogs, YoutubePlayers) {
+    controller: ['$rootScope', '$scope', '$window', 'Database', 'Auth', 'Dialogs', 'YoutubePlayers', 'Utils', function ($rootScope, $scope, $window, Database, Auth, Dialogs, YoutubePlayers, Utils) {
       var checkVote = function () {
         Database.hasVote($scope.playof.key).then(function (userVote) {
           if (userVote.val()) {
@@ -15,6 +15,18 @@ angular.module('wnh.components', ['wnh.services'])
       $scope.hasVote = false;
       $scope.author = null;
       $scope.currentUser = Auth.getUser();
+
+      $scope.shareProviders = [{id: 'facebook', name: 'Facebook'}, {id: 'twitter', name: 'Twitter'}, {id: 'google', name: 'Google+'}];
+
+      $scope.shareData = {
+        text: 'Check this amazing Play of the game with ' + Utils.heroesList[$scope.playof.hero].name,
+        url: 'https://worldneedsheroes.com/post/' + $scope.playof.key,
+        hashtags: 'WorldNeedsHeroes,Overwatch'
+      };
+
+      $scope.openMenu = function ($mdOpenMenu, ev) {
+        $mdOpenMenu(ev);
+      };
 
       $scope.vote = function () {
         if (Auth.getUser()) {
