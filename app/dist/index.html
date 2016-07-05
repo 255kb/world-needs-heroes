@@ -42,7 +42,7 @@
           <md-button ng-click="dataFilters.setTimeframe(timeframe.filter)"
                      ng-class="{'md-accent': timeframe.filter === currentTimeframe}">
             <md-icon ng-if="timeframe.filter === currentTimeframe">check</md-icon>
-            {{timeframe.title}}
+            <span class="hide-xs hide-sm" flex>{{timeframe.title}}</span>
           </md-button>
         </md-menu-item>
       </md-menu-content>
@@ -51,9 +51,7 @@
     <md-menu>
       <md-button aria-label="Open hero filter menu" ng-click="openMenu($mdOpenMenu, $event)">
         <span ng-if="currentHero === ''"><md-icon md-menu-origin>done</md-icon>All heroes</span>
-        <md-icon md-menu-origin ng-if="currentHero === 'multi'">grade</md-icon>
-        <md-icon class="ohi-{{currentHero}} hero-icon"
-                 ng-if="currentHero !== 'multi'"></md-icon>
+        <md-icon class="ohi-{{currentHero}} hero-icon"></md-icon>
         {{currentHero | heroName}}
         <md-tooltip md-direction="bottom">
           Filter by hero
@@ -69,8 +67,7 @@
         <md-menu-item ng-repeat="hero in heroes">
           <md-button ng-click="dataFilters.setHero(hero.id)"
                      ng-class="{'md-accent': hero.id === currentHero}">
-            <md-icon md-menu-origin ng-if="hero.id === 'multi'">grade</md-icon>
-            <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big" ng-if="hero.id !== 'multi'"></md-icon>
+            <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big"></md-icon>
             {{hero.filterName || hero.name}}
           </md-button>
         </md-menu-item>

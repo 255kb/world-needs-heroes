@@ -2,7 +2,6 @@ angular.module('wnh.services', [])
   .factory('Utils', ['$mdToast', function ($mdToast) {
     return {
       heroesList: {
-        'multi': {id: 'multi', name: 'Multiple heroes'},
         'genji': {id: 'genji', name: 'Genji'},
         'mccree': {id: 'mccree', name: 'Mccree'},
         'pharah': {id: 'pharah', name: 'Pharah'},
@@ -26,7 +25,7 @@ angular.module('wnh.services', [])
         'zenyatta': {id: 'zenyatta', name: 'Zenyatta'}
       },
       timeframesList: [
-        {filter: 'week', title: 'Last 7 days'},
+        {filter: 'week', title: '7 days'},
         {filter: 'day', title: 'Last day'},
         {filter: 'all', title: 'Overall'}
       ],
