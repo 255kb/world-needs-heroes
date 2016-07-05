@@ -38,6 +38,7 @@ angular.module('wnh.main', ['ngRoute', 'wnh.services'])
     $rootScope.$on('dataFiltersTimeframeChanged', fetchData);
 
     $rootScope.$on('dataFiltersHeroChanged', function (event, hero) {
+      initLimit();
       $scope.currentHero = hero;
     });
   }]);

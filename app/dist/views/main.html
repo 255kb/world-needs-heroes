@@ -2,14 +2,12 @@
   <md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>
 </div>
 <div
-  ng-repeat="playof in playofList | orderBy: '-votesCount' | limitTo: limit | filter: {hero: currentHero} as playofListFiltered">
+  ng-repeat="playof in playofListFiltered = (playofList | filter: {hero: currentHero}) | orderBy: '-votesCount' | limitTo: limit">
   <wnh-post playof="playof"></wnh-post>
 </div>
-<div
-  ng-if="(playofList.length && playofList.length > limit) || (playofListFiltered.length && playofListFiltered.length > limit)"
-  ng-click="showMore()" class="show-more">
+<div ng-if="playofListFiltered.length && playofListFiltered.length > limit" ng-click="showMore()" class="show-more">
   <md-button class="md-accent">Show more</md-button>
 </div>
-<div ng-if="playofList.length && !playofListFiltered.length" class="show-more">
-  <md-subheader class="md-accent">There is no video in this category</md-subheader>
+<div ng-if="!playofListFiltered.length" class="show-more">
+  <md-subheader class="md-accent">There is no video for this hero/timeframe</md-subheader>
 </div>
