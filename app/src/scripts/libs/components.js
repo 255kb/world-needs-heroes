@@ -17,7 +17,7 @@ angular.module('wnh.components', ['wnh.services'])
       $scope.author = null;
       $scope.currentUser = Auth.getUser();
 
-      $scope.shareProviders = [{id: 'facebook', name: 'Facebook'}];
+      $scope.shareProviders = [{id: 'twitter', name: 'Twitter'}];
 
       $scope.shareData = {
         text: 'Check this amazing Play of the game with ' + Utils.heroesList[$scope.playof.hero].name,
