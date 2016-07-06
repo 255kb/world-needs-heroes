@@ -120,6 +120,18 @@ body {
   font-weight: bold;
 }
 
+body._md-toast-animating {
+  overflow: auto !important;
+}
+
+md-toast {
+  position: fixed;
+}
+
+md-input-container {
+  margin-bottom: 0;
+}
+
 .login-dialog {
   text-align: center;
 }

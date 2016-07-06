@@ -217,37 +217,59 @@ angular.module('wnh.services', [])
             });
         });
       },
-      showPostDialog: function () {
+      showPostDialog: function (edit, playof) {
         if (Auth.getUser()) {
           $mdDialog.show({
             controller: ['$scope', '$mdDialog', '$location', 'Utils', 'Youtube', 'Database', function ($scope, $mdDialog, $location, Utils, Youtube, Database) {
+              $scope.edit = edit;
               $scope.heroesList = Utils.heroesList;
               $scope.invalidId = false;
-              $scope.newPost = {
+              $scope.post = {
                 videoLink: '',
-                hero: ''
+                hero: (playof && playof.hero) || '',
+                description: (playof && playof.description) || ''
               };
 
               $scope.videoLinkChange = function () {
                 $scope.invalidId = false;
               };
 
-              $scope.post = function () {
-                if ($scope.newPost.videoLink && $scope.newPost.hero) {
-                  var regex = $scope.newPost.videoLink.match(/(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/i), videoId = null;
+              $scope.save = function () {
+                if ($scope.post.hero) {
+                  var data = {hero: $scope.post.hero};
+                  if ($scope.post.description) {
+                    data.description = $scope.post.description;
+                  }
+
+                  Database.updatePost(playof.key, data).then(function () {
+                    playof.hero = data.hero;
+                    playof.description = data.description || '';
+                    ga('send', 'event', 'playof', 'edit_post');
+                    $mdDialog.hide();
+                    Utils.showToast('Modifications saved');
+                  }).catch(function (error) {
+                    Utils.showToast('Error, please try again later');
+                  });
+
+                }
+              };
+
+              $scope.newPost = function () {
+                if ($scope.post.videoLink && $scope.post.hero) {
+                  var regex = $scope.post.videoLink.match(/(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/i), videoId = null;
                   if (regex && regex[1].length === 11) {
                     videoId = regex[1];
                   } else {
-                    videoId = $scope.newPost.videoLink;
+                    videoId = $scope.post.videoLink;
                   }
 
                   if (videoId && videoId.length === 11) {
                     //check if valid id with YT API
                     Youtube.getVideoInfo(videoId).then(function successCallback(response) {
                       if (response.data.items.length) {
-                        var data = {youtubeId: videoId, hero: $scope.newPost.hero};
-                        if ($scope.newPost.description) {
-                          data.description = $scope.newPost.description;
+                        var data = {youtubeId: videoId, hero: $scope.post.hero};
+                        if ($scope.post.description) {
+                          data.description = $scope.post.description;
                         }
 
                         var newPost = Database.newPost(data);
@@ -319,6 +341,11 @@ angular.module('wnh.services', [])
           });
 
           return newPost.key;
+        }
+      },
+      updatePost: function (key, data) {
+        if (Auth.getUser()) {
+          return firebaseDatabaseInstance.ref('posts/' + key).update(data);
         }
       },
       vote: function (postId, alreadyVoted) {

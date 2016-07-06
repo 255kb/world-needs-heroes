@@ -1,7 +1,7 @@
 angular.module('wnh.components', ['wnh.services'])
   .component('wnhPost', {
     templateUrl: 'views/components/post.html',
-    controller: ['$rootScope', '$scope', '$window', 'Database', 'Auth', 'Dialogs', 'YoutubePlayers', 'Utils', function ($rootScope, $scope, $window, Database, Auth, Dialogs, YoutubePlayers, Utils) {
+    controller: ['$rootScope', '$scope', 'Database', 'Auth', 'Dialogs', 'YoutubePlayers', 'Utils', function ($rootScope, $scope, Database, Auth, Dialogs, YoutubePlayers, Utils) {
       var checkVote = function () {
         Database.hasVote($scope.playof.key).then(function (userVote) {
           if (userVote.val()) {
@@ -11,6 +11,7 @@ angular.module('wnh.components', ['wnh.services'])
       };
 
       $scope.playof = this.playof;
+      $scope.dialogs = Dialogs;
       $scope.voteIsHover = false;
       $scope.hasVote = false;
       $scope.author = null;

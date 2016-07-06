@@ -76,10 +76,6 @@
 
     <span flex></span>
 
-    <md-button class="md-raised md-warn hide-xs" ng-click="dialogs.showPostDialog()">
-      Post
-    </md-button>
-
     <md-menu ng-if="currentUser">
       <md-button class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)" aria-label="Open user menu">
         <img ng-src="{{currentUser.photoURL}}" class="toolbar-avatar">
@@ -122,7 +118,7 @@
   </div>
 </md-content>
 
-<md-button class="md-fab md-fab-bottom-right md-warn hide-gt-xs" style="position: fixed;" ng-controller="PostBtnCtrl" ng-click="dialogs.showPostDialog()">
+<md-button class="md-fab md-fab-bottom-right md-warn" style="position: fixed;" ng-controller="PostBtnCtrl" ng-click="dialogs.showPostDialog(false)">
   <md-icon>publish</md-icon>
 </md-button>
 

@@ -1,7 +1,8 @@
 <md-dialog flex="60" ng-cloak>
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <p class="md-body-2">Add a video</p>
+      <p class="md-body-2" ng-if="edit">Edit your video</p>
+      <p class="md-body-2" ng-if="!edit">Add a video</p>
       <span flex></span>
       <md-button class="md-icon-button" ng-click="hide()">
         <md-icon>close</md-icon>
@@ -10,36 +11,39 @@
   </md-toolbar>
   <md-dialog-content>
     <div class="md-dialog-content">
-      <form name="newPostForm">
-        <md-input-container class="md-block">
+      <form name="postForm">
+        <md-input-container class="md-block" ng-if="!edit">
           <label>Youtube video link or ID</label>
-          <input required name="videoLink" ng-model="newPost.videoLink" ng-change="videoLinkChange()">
-          <div ng-messages="newPostForm.videoLink.$error">
+          <input required name="videoLink" ng-model="post.videoLink" ng-change="videoLinkChange()">
+          <div ng-messages="postForm.videoLink.$error">
             <div ng-message="required">The video ID is required.</div>
           </div>
         </md-input-container>
         <md-input-container class="md-block">
           <label>Hero</label>
-          <md-select required name="hero" ng-model="newPost.hero">
+          <md-select required name="hero" ng-model="post.hero">
             <md-option ng-repeat="hero in heroesList" value="{{hero.id}}">
               <md-icon class="ohi-{{hero.id}} hero-icon hero-icon--big"></md-icon>
               {{hero.name}}
             </md-option>
           </md-select>
-          <div ng-messages="newPostForm.hero.$error">
+          <div ng-messages="postForm.hero.$error">
             <div ng-message="required">Please choose a hero.</div>
           </div>
         </md-input-container>
         <md-input-container class="md-block">
           <label>Description (optional)</label>
-          <input name="description" ng-model="newPost.description">
+          <input name="description" ng-model="post.description">
         </md-input-container>
         <div ng-if="invalidId" class="validation-msg">This Youtube video ID is invalid.</div>
       </form>
     </div>
   </md-dialog-content>
   <md-dialog-actions>
-    <md-button ng-click="post()" class="md-accent">
+    <md-button ng-click="save()" class="md-accent" ng-if="edit">
+      Save
+    </md-button>
+    <md-button ng-click="newPost()" class="md-accent" ng-if="!edit">
       Post
     </md-button>
   </md-dialog-actions>
