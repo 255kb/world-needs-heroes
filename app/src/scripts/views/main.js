@@ -6,13 +6,15 @@ angular.module('wnh.main', ['ngRoute', 'wnh.services'])
     });
   }])
 
-  .controller('MainCtrl', ['$rootScope', '$scope', 'Auth', 'Database', 'Utils', 'DataFilters', function ($rootScope, $scope, Auth, Database, Utils, DataFilters) {
+  .controller('MainCtrl', ['$rootScope', '$scope', 'Auth', 'Database', 'Utils', 'DataFilters', 'Header', function ($rootScope, $scope, Auth, Database, Utils, DataFilters, Header) {
     var initLimit = function () {
         $scope.page = 1;
         $scope.limit = $scope.page * Utils.itemsPerPage;
       },
       fetchData = function (event, timeframe) {
         initLimit();
+        Header.setTitle('Vote for the best play of the game - World Needs Heroes');
+        Header.setMeta('description', 'Check the latest Overwatch play of the game and vote for the best one on World Needs Heroes');
         $scope.playofList = [];
 
         Database.getPlayofList(timeframe).on('child_added', function (post) {

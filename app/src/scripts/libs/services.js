@@ -41,6 +41,17 @@ angular.module('wnh.services', [])
     };
   }])
 
+  .factory('Header', ['$window', function ($window) {
+    return {
+      setTitle: function (title) {
+        $window.document.title = title;
+      },
+      setMeta: function (meta, description) {
+        $window.document.querySelector('meta[name="' + meta + '"]').setAttribute('content', description);
+      }
+    };
+  }])
+
   .factory('DataFilters', ['$rootScope', function ($rootScope) {
     var currentTimeframe = 'week', currentHero = '';
 
