@@ -23,16 +23,6 @@ angular.module('wnh.post', ['ngRoute', 'wnh.services'])
 
           Header.setTitle('Play of the game with ' + heroName + ' - World Needs Heroes');
           Header.setMeta('description', 'Discover and vote for this amazing Overwatch play of the game with ' + heroName + ' on World Needs Heroes');
-          Header.setMeta('og:url', 'https://worldneedsheroes.com/post/' + $scope.playof.key);
-          Header.setMeta('og:title', 'Play of the game with ' + heroName + ' - World Needs Heroes');
-          Header.setMeta('og:description', 'Discover and vote for this amazing Overwatch play of the game with ' + heroName + ' on World Needs Heroes');
-
-          Youtube.getVideoInfo($scope.playof.youtubeId).then(function successCallback(response) {
-            if (response.data.items.length) {
-              Header.setMeta('og:image', response.data.items[0].snippet.thumbnails.maxres.url);
-            }
-          }, function errorCallback(error) {
-          });
         } else {
           $scope.inProgress = false;
           $scope.playof = null;
