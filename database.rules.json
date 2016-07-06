@@ -12,18 +12,21 @@
           ".validate": "(!data.exists() && newData.val() === 0) || (data.exists() && ( (newData.val() === data.val() + 1 && newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && !data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists())  || (newData.val() === data.val() - 1 && !newData.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists() && data.parent().parent().parent().child('votes').child($postId).child(auth.uid).exists()) ))"
         },
         "postedAt": {
-          ".validate": "newData.isNumber() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val() && newData.val() === now) )"
+          //only allows create
+          ".validate": "newData.isNumber() && (!data.exists() && auth.uid === newData.parent().child('userId').val() && newData.val() === now)"
         },
         "userId": {
-          ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
+          //only allows create
+          ".validate": "newData.isString() && (!data.exists() && auth.uid === newData.parent().child('userId').val())"
+        },
+        "youtubeId": {
+          //only allows create
+          ".validate": "newData.isString() && (!data.exists() && auth.uid === newData.parent().child('userId').val())"
         },
         "hero": {
           ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
         },
         "description": {
-          ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
-        },
-        "youtubeId": {
           ".validate": "newData.isString() && ((data.exists() && root.child('posts').child($postId).child('userId').val() === auth.uid) || (!data.exists() && auth.uid === newData.parent().child('userId').val()) )"
         },
         "$other": {
