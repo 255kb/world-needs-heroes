@@ -46,8 +46,11 @@ angular.module('wnh.services', [])
       setTitle: function (title) {
         $window.document.title = title;
       },
-      setMeta: function (meta, description) {
+      setMetaName: function (meta, description) {
         $window.document.querySelector('meta[name="' + meta + '"]').setAttribute('content', description);
+      },
+      setMetaProperty: function (meta, description) {
+        $window.document.querySelector('meta[property="' + meta + '"]').setAttribute('content', description);
       }
     };
   }])

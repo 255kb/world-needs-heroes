@@ -14,7 +14,7 @@ angular.module('wnh.main', ['ngRoute', 'wnh.services'])
       fetchData = function (event, timeframe) {
         initLimit();
         Header.setTitle('Vote for the best play of the game - World Needs Heroes');
-        Header.setMeta('description', 'Check the latest Overwatch play of the game and vote for the best one on World Needs Heroes');
+        Header.setMetaName('description', 'Check the latest Overwatch play of the game and vote for the best one on World Needs Heroes');
         $scope.playofList = [];
 
         Database.getPlayofList(timeframe).on('child_added', function (post) {
