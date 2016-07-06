@@ -19,7 +19,7 @@ angular.module('wnh.post', ['ngRoute', 'wnh.services'])
           $scope.playof.key = playof.key;
           $scope.inProgress = false;
 
-          var heroName = Utils.heroesList[playof.hero] && Utils.heroesList[playof.hero].name;
+          var heroName = Utils.heroesList[$scope.playof.hero] && Utils.heroesList[$scope.playof.hero].name;
 
           Header.setTitle('Play of the game with ' + heroName + ' - World Needs Heroes');
           Header.setMeta('description', 'Discover and vote for this amazing Overwatch play of the game with ' + heroName + ' on World Needs Heroes');
