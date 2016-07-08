@@ -16,6 +16,7 @@ angular.module('wnh.components', ['wnh.services'])
       $scope.hasVote = false;
       $scope.author = null;
       $scope.currentUser = Auth.getUser();
+      $scope.defaultPicture = '/avatar.jpg';
 
       $scope.shareProviders = [{id: 'twitter', name: 'Twitter'}];
 

@@ -52,7 +52,7 @@
 
     <md-card-header ng-if="author && author.name">
       <md-card-avatar>
-        <img class="md-user-avatar" ng-src="{{author.picture}}">
+        <img class="md-user-avatar" ng-src="{{author.picture || defaultPicture}}">
       </md-card-avatar>
       <md-card-header-text>
         <div class="md-title wnh-post__author">
