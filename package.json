@@ -1,8 +1,8 @@
 {
-  "name": "angular-seed",
+  "name": "world-needs-heroes",
   "private": true,
-  "version": "0.0.0",
-  "description": "A starter project for AngularJS",
+  "version": "1.0.0",
+  "description": "Check the latest Overwatch play of the game and vote for the best one on World Needs Heroes",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",
