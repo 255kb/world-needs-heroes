@@ -53,7 +53,7 @@ angular.module('wnh.services', [])
   }])
 
   .factory('DataFilters', ['$rootScope', function ($rootScope) {
-    var currentTimeframe = 'week', currentHero = '';
+    var currentTimeframe = 'all', currentHero = '';
 
     return {
       getTimeframe: function () {
