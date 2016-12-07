@@ -261,6 +261,14 @@ md-card md-card-header:last-child md-card-avatar {
   font-size: 32px;
 }
 
+.wnh-post__hero-tag--color-ana {
+  background-color: rgb(59, 134, 179);
+}
+
+.wnh-post__hero-tag--color-sombra {
+  background-color: rgb(113, 96, 172);
+}
+
 .wnh-post__hero-tag--color-genji {
   background-color: rgb(160, 182, 138);
 }
