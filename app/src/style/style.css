@@ -32,6 +32,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ohi-orisa:before {
+  content: "\e918";
+}
+
 .ohi-ana:before {
   content: "\e915";
 }
@@ -259,6 +263,10 @@ md-card md-card-header:last-child md-card-avatar {
 
 .wnh-post__hero-icon {
   font-size: 32px;
+}
+
+.wnh-post__hero-tag--color-orisa {
+  background-color: rgb(189, 198, 50);
 }
 
 .wnh-post__hero-tag--color-ana {

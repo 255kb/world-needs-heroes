@@ -12,6 +12,7 @@ angular.module('wnh.services', [])
         'mccree': {id: 'mccree', name: 'Mccree'},
         'mei': {id: 'mei', name: 'Mei'},
         'mercy': {id: 'mercy', name: 'Mercy'},
+        'orisa': {id: 'orisa', name: 'Orisa'},
         'pharah': {id: 'pharah', name: 'Pharah'},
         'reaper': {id: 'reaper', name: 'Reaper'},
         'reinhardt': {id: 'reinhardt', name: 'Reinhardt'},
