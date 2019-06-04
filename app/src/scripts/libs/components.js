@@ -22,7 +22,7 @@ angular.module('wnh.components', ['wnh.services'])
 
       $scope.shareData = {
         text: 'Check this amazing Play of the game with ' + Utils.heroesList[$scope.playof.hero].name,
-        url: 'https://worldneedsheroes.com/post/' + $scope.playof.key,
+        url: 'https://world-needs-heroes.web.app/post/' + $scope.playof.key,
         hashtags: 'WorldNeedsHeroes,Overwatch'
       };
 
